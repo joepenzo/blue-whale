@@ -18,6 +18,9 @@ function createWindow () {
       slashes: true
     }))
 
+    // Open the DevTools.
+    win.webContents.openDevTools();
+
     // Open the DevTools when in dev mode.
     if(process.env.NODE_ENV=='development')
       win.webContents.openDevTools()
