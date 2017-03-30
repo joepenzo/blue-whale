@@ -9,6 +9,8 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module'
 
+import { FlexLayoutModule } from '@angular/flex-layout'
+
 import 'hammerjs';
 import { ContainersComponent } from './pages/containers/containers.component';
 
@@ -22,6 +24,7 @@ import { ContainersComponent } from './pages/containers/containers.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    FlexLayoutModule,
     AppRoutingModule
   ],
   providers: [DockerService],

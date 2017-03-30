@@ -1,0 +1,40 @@
+.containers-list {
+    overflow-y: auto;
+    height: 100%;
+    padding-bottom: 64px;
+}
+
+.containers-list-item-stopped {
+    background-color: #3498db
+}
+
+.containers-list-item-running {
+    background-color: green;
+}
+
+md-card {
+    padding: 10px;
+    border-radius: 0;
+    margin: 10px 10px 0 10px;
+}
+
+md-card>md-card-actions>button {
+    color: white;
+}
+
+md-card-header {
+    margin: 0px;
+}
+
+md-card-subtitle>label {
+    margin-right: 5px;
+}
+
+md-card-subtitle>span {
+    margin-right: 10px;
+}
+
+.mat-card>.mat-card-actions:last-child {
+    margin-bottom: -16px;
+    padding-bottom: 8px;
+}

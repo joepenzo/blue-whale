@@ -1,12 +1,16 @@
 <!--sidenav content -->
-<md-toolbar color='primary' class="mat-elevation-z6">
-  <md-icon svgIcon="docker-logo" style="height: 40px; width: 40px;">docker-logo</md-icon>
+<md-toolbar class="mat-elevation-z6">
+  <button md-icon-button routerLink="/" routerLinkActive="active">
+    <md-icon svgIcon="docker-logo" style="height: 40px; width: 40px;">docker-logo</md-icon>
+  </button>
+  
   <span style="flex: 1 1 auto;"></span>
-  <button md-icon-button title="Containers">
-    <md-icon style="color: lawngreen">grain</md-icon>
+
+  <button md-icon-button title="Containers" routerLink="/containers" routerLinkActive="active">
+    <md-icon style="color: #3498db">grain</md-icon>
   </button>
   <button md-icon-button title="Images">
-    <md-icon style="color: dodgerblue">view_comfy</md-icon>
+    <md-icon style="color: #3498db">view_comfy</md-icon>
   </button>
 </md-toolbar>
 

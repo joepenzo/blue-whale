@@ -1,3 +1,39 @@
-<p>
-  containers works!
-</p>
+<!--<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex class="coloredContainerX box" >
+    <div fxFlex> I'm above on mobile, and to the left on larger devices.   </div>
+    <div fxFlex> I'm below on mobile, and to the right on larger devices.  </div>
+  </div>-->
+<div fxLayout="column" fxFlex class="containers-list">
+  <md-card fxFlex *ngFor="let item of containers" [ngClass]="{'containers-list-item-stopped': item.State != 'running', 'containers-list-item-running': item.State == 'running'}">
+    <md-card-header>
+      <md-card-title>
+        <span *ngFor="let name of item.Names">{{name.slice(1)}} </span>
+      </md-card-title>
+      <md-card-subtitle>
+        <label>Image:</label><span>{{item.Image}}</span>
+        <label>Network:</label><span>{{item.HostConfig.NetworkMode}}</span>
+        <label>Ports:</label>
+        <span *ngFor="let port of item.Ports">{{port.PublicPort}}:{{port.PrivatePort}}-> {{port.Type}}</span>
+      </md-card-subtitle>
+    </md-card-header>
+
+    <md-card-actions fxLayout='row' fxLayoutAlign="end end">
+      <button md-icon-button title="Start" *ngIf="item.State != 'running'" (click)="start(item.Id)">
+        <md-icon>play_arrow</md-icon>
+      </button>
+      <button md-icon-button title="Stop" *ngIf="item.State == 'running'" (click)="stop(item.Id)">
+      <md-icon>pause</md-icon>
+    </button>
+      <button md-icon-button title="Restart">
+      <md-icon>replay</md-icon>
+    </button>
+      <button md-icon-button title="Exec" *ngIf="item.State == 'running'">
+      <md-icon>code</md-icon>
+    </button>
+      <button md-icon-button title="Remove">
+      <md-icon>delete</md-icon>
+    </button>
+    </md-card-actions>
+
+  </md-card>
+
+</div>
