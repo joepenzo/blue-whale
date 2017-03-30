@@ -25,3 +25,10 @@
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+html,body {
+  margin: 0px;
+  height: 100%;
+  overflow: hidden;
+  font-size: 13px;
+}

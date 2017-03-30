@@ -1,18 +1,21 @@
 import { DockerService } from './shared/Docker.service';
-import { Component } from '@angular/core';
-
-import { remote } from 'electron'
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MdIconRegistry } from '@angular/material';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app works!';
+export class AppComponent implements OnInit {
 
-  constructor(dockerService: DockerService) {
-    
+  constructor(public dockerService: DockerService, mdIconRegistry: MdIconRegistry, sanitizer: DomSanitizer) {
+    mdIconRegistry.addSvgIcon("docker-logo", sanitizer.bypassSecurityTrustResourceUrl('assets/images/logo.svg'));
+  }
+
+  ngOnInit() {
+  
   }
 
 }

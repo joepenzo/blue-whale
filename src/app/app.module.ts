@@ -7,18 +7,22 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module'
 
 import 'hammerjs';
+import { ContainersComponent } from './pages/containers/containers.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ContainersComponent
   ],
   imports: [
     MaterialModule,
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [DockerService],
   bootstrap: [AppComponent]

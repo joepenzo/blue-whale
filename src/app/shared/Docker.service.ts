@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-
 import { remote } from 'electron'
+import { ContainerInfo } from 'dockerode'
 
 @Injectable()
 export class DockerService {
 
+    Docker = remote.require("dockerode");
+    docker = new this.Docker({
+        socketPath: '/var/run/docker.sock'
+    });
+
     constructor() {
-        console.log(remote.getCurrentWindow());
+    }
 
-        const Docker = remote.require("dockerode");
-        const docker = new Docker({
-            socketPath: '/var/run/docker.sock'
-        });
-
-        docker.listContainers({ all: true }).then((containers) => {
-            console.log(containers);
-        });
+    /**
+     * all of contatisers
+     */
+    getContainers(): Promise<ContainerInfo> {
+        return this.docker.listContainers({ all: true });
     }
 
 }
