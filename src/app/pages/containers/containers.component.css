@@ -1,7 +1,17 @@
 .containers-list {
     overflow-y: auto;
     height: 100%;
-    padding-bottom: 64px;
+    padding: 5px;
+    white-space: nowrap;
+    padding-top: 64px;
+}
+
+.containers-list > div {
+    padding: 5px;
+}
+
+md-card-content span {
+    color: #f2f2f2;
 }
 
 .containers-list-item-stopped {
@@ -12,29 +22,6 @@
     background-color: green;
 }
 
-md-card {
-    padding: 10px;
-    border-radius: 0;
-    margin: 10px 10px 0 10px;
-}
-
-md-card>md-card-actions>button {
+md-card-actions {
     color: white;
-}
-
-md-card-header {
-    margin: 0px;
-}
-
-md-card-subtitle>label {
-    margin-right: 5px;
-}
-
-md-card-subtitle>span {
-    margin-right: 10px;
-}
-
-.mat-card>.mat-card-actions:last-child {
-    margin-bottom: -16px;
-    padding-bottom: 8px;
 }

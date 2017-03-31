@@ -1,5 +1,6 @@
 import { DockerService } from './shared/Docker.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -13,11 +14,13 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 
 import 'hammerjs';
 import { ContainersComponent } from './pages/containers/containers.component';
+import { ContainersLayoutComponent } from './pages/containers/containers-layer.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContainersComponent
+    ContainersComponent,
+    ContainersLayoutComponent
   ],
   imports: [
     MaterialModule,
@@ -25,7 +28,8 @@ import { ContainersComponent } from './pages/containers/containers.component';
     FormsModule,
     HttpModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [DockerService],
   bootstrap: [AppComponent]

@@ -36,5 +36,13 @@ export class DockerService {
         return this.docker.getContainer(id).start();
     }
 
+    /**
+     * remove container
+     * @param id 
+     */
+    removeContainer(id: String): Promise<any> {
+        return this.docker.getContainer(id).remove();
+    }
+
 
 }
