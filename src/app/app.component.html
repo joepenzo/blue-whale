@@ -9,10 +9,15 @@
   <button md-icon-button title="Containers" routerLink="/containers" routerLinkActive="active">
     <md-icon style="color: #3498db">grain</md-icon>
   </button>
-  <button md-icon-button title="Images">
+  <button md-icon-button title="Images" routerLink="/images" routerLinkActive="active">
     <md-icon style="color: #3498db">view_comfy</md-icon>
   </button>
 </md-toolbar>
 
 <!-- Routed views go here -->
-<router-outlet></router-outlet>
+<div class="app-content-padding">
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="loading">
+      <md-progress-bar mode='indeterminate'></md-progress-bar>
+  </div>
+  <router-outlet></router-outlet>
+</div>
