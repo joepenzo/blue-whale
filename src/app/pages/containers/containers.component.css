@@ -9,8 +9,9 @@
     padding: 5px;
 }
 
-md-card-content span {
-    color: #f2f2f2;
+.containers-list span {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }
 
 .containers-list-item-stopped {
@@ -19,6 +20,10 @@ md-card-content span {
 
 .containers-list-item-running {
     background-color: green;
+}
+
+.containers-list-item-waiting {
+    background: yellow;
 }
 
 md-card-actions {

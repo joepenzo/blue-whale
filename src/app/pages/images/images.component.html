@@ -1,3 +1,23 @@
-<p>
-  images works!
-</p>
+<div fxLayoutWrap class="images-list">
+  <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of images" [attr.title]="item.RepoTags.join(', ')">
+    <md-card>
+      <md-card-subtitle>
+        <div fxLayout="row" fxLayoutAlign="space-between end">
+          <span>{{item.RepoTags.join(", ")}}</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between end">
+          <span>{{item.Created * 1000 | date:'medium'}}</span>
+          <span>{{item.Size | length}}</span>
+        </div>
+      </md-card-subtitle>
+
+      <md-card-actions fxLayout="row" fxLayoutAlign="center end">
+        <button md-icon-button title="Create">
+          <md-icon>play_arrow</md-icon>
+        </button>
+      </md-card-actions>
+
+    </md-card>
+
+  </div>
+</div>

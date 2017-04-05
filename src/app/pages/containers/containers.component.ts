@@ -17,22 +17,22 @@ export class ContainersComponent implements OnInit {
     this.refresh();
   }
 
-  start(id: String, index: number) {
+  start(id: string, index: number) {
     this.containers[index].State = "waiting";
     this.dockerService.startContainer(id)
-      .then((value: ContainerInspectInfo) => {
+      .then((value: any) => {
         this.containers[index].State = "running";
       })
-      .catch((error: String) => {
+      .catch((error: string) => {
         this.snackBar.open((error + "").split(":").splice(2).join(" "), "Start", { duration: 5000 });
         this.containers[index].State = "exited";
       });
   }
 
-  stop(id: String, index: number) {
+  stop(id: string, index: number) {
     this.containers[index].State = "waiting";
     this.dockerService.stopContainer(id)
-      .then((value: ContainerInspectInfo) => {
+      .then((value: any) => {
         this.containers[index].State = "exited";
       })
       .catch((error: String) => {
@@ -41,18 +41,14 @@ export class ContainersComponent implements OnInit {
       });
   }
 
-  restart(id: String, index: number) {
+  restart(id: string, index: number) {
     this.containers[index].State = "waiting";
     this.dockerService.stopContainer(id)
-      .then((value: ContainerInspectInfo) => {
+      .then((value: any) => {
         this.dockerService.startContainer(id)
-          .then((value: ContainerInspectInfo) => {
+          .then((value: any) => {
             this.containers[index].State = "running";
           })
-          .catch((error: String) => {
-            this.snackBar.open((error + "").split(":").splice(2).join(" "), "Start", { duration: 5000 });
-            this.containers[index].State = "running";
-          });
       })
       .catch((error: String) => {
         this.snackBar.open((error + "").split(":").splice(2).join(" "), "Start", { duration: 5000 });
@@ -60,7 +56,7 @@ export class ContainersComponent implements OnInit {
       });
   }
 
-  remove(id: String, index: number) {
+  remove(id: string, index: number) {
     this.containers[index].State = "waiting";
     this.dockerService.removeContainer(id)
       .then((value: any) => {

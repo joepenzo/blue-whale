@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { remote } from 'electron'
-import { ContainerInfo, ContainerInspectInfo } from 'dockerode'
+import { remote } from 'electron';
+import { ContainerInfo, ContainerInspectInfo, ImageInfo, ImageInspectInfo } from 'dockerode';
+import * as Dockerode from 'dockerode';
 
 @Injectable()
 export class DockerService {
@@ -9,8 +10,15 @@ export class DockerService {
     docker = new this.Docker({
         socketPath: '/var/run/docker.sock'
     });
+ 
+    constructor() {}
 
-    constructor() {
+    getInfo(): Promise<any> {
+        return this.docker.info();
+    }
+
+    getVersion(): Promise<any> {
+        return this.docker.version();
     }
 
     /**
@@ -21,10 +29,18 @@ export class DockerService {
     }
 
     /**
+     * get container by id
+     * @param id get
+     */
+    getContainer(id: string): Dockerode.Container {
+        return this.docker.getContainer(id);
+    }
+
+    /**
      * stop container
      * @param id 
      */
-    stopContainer(id: String): Promise<ContainerInspectInfo> {
+    stopContainer(id: string): Promise<ContainerInspectInfo> {
         return this.docker.getContainer(id).stop();
     }
 
@@ -32,7 +48,7 @@ export class DockerService {
      * start container
      * @param id 
      */
-    startContainer(id: String): Promise<ContainerInspectInfo> {
+    startContainer(id: string): Promise<any> {
         return this.docker.getContainer(id).start();
     }
 
@@ -40,8 +56,39 @@ export class DockerService {
      * remove container
      * @param id 
      */
-    removeContainer(id: String): Promise<any> {
+    removeContainer(id: string): Promise<any> {
         return this.docker.getContainer(id).remove();
+    }
+
+    /**
+     * all of locale images
+     */
+    getImages(): Promise<Array<ImageInfo>> {
+        return this.docker.listImages({digests: true});
+    }
+
+    /**
+     * search for an image on Docker Hub
+     * @param name term
+     */
+    searchImages(trem: String): Promise<any> {
+        return this.docker.searchImages({term: trem});
+    }
+
+    /**
+     * get image by name
+     * @param name image name
+     */
+    getImage(name: string): Dockerode.Image {
+        return this.docker.getImage(name);
+    }
+    
+    /**
+     * get image inspect
+     * @param name 
+     */
+    getImageInspect(name: string): Promise<ImageInspectInfo> {
+        return this.docker.getImage(name).inspect();
     }
 
 
