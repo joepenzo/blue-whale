@@ -30,16 +30,16 @@
         <button md-icon-button title="Exec" *ngIf="item.State == 'running'">
         <md-icon>code</md-icon>
       </button>
-        <button md-icon-button title="Remove" *ngIf="item.State != 'running'" (click)="remove(item.Id, i)">
-        <md-icon>delete</md-icon>
+        <button md-icon-button title="Remove" (click)="remove(item.Id, i)">
+        <md-icon>delete_forever</md-icon>
       </button>
       </md-card-actions>
     </md-card>
 
-    <layer *ngIf="item.State == 'waiting'" [height]="160" ></layer>
-
+    <layer *ngIf="item.State == 'waiting'" [height]="160"></layer>
   </div>
 </div>
+
 <button title="Refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="refresh()">
   <md-icon>refresh</md-icon>
 </button>

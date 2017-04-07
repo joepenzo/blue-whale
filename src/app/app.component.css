@@ -1,26 +1,9 @@
-/* fixed top toolbar */
-
-md-toolbar {
-  position: fixed;
-  z-index: 2;
-}
-
-
-/* content padding top */
-
-.app-content-padding {
-  padding-top: 64px;
-}
-
-@media (max-width:600px) and (orientation:portrait) {
-  .app-content-padding {
-    padding-top: 56px
-  }
-}
-
-@media (max-width:960px) and (orientation:landscape) {
-  .app-content-padding {
-    padding-top: 48px
-  }
+.app-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
 }
 

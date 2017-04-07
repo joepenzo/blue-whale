@@ -1,8 +1,6 @@
 .containers-list {
-    overflow-y: auto;
-    height: 100%;
-    padding: 5px;
     white-space: nowrap;
+    padding: 5px;
 }
 
 .containers-list > div {
@@ -26,6 +24,12 @@
     background: yellow;
 }
 
-md-card-actions {
+md-card-actions md-icon {
     color: white;
+}
+
+:host {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

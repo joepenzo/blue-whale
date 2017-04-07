@@ -1,23 +1,23 @@
-<!--sidenav content -->
-<md-toolbar class="mat-elevation-z6">
-  <button md-icon-button routerLink="/" routerLinkActive="active">
-    <md-icon svgIcon="docker-logo" style="height: 40px; width: 40px;">docker-logo</md-icon>
-  </button>
-  
-  <span style="flex: 1 1 auto;"></span>
+<div fxLayout="column" fxLayoutAlign="none" class="app-content">
 
-  <button md-icon-button title="Containers" routerLink="/containers" routerLinkActive="active">
-    <md-icon style="color: #3498db">grain</md-icon>
-  </button>
-  <button md-icon-button title="Images" routerLink="/images" routerLinkActive="active">
-    <md-icon style="color: #3498db">view_comfy</md-icon>
-  </button>
-</md-toolbar>
+  <md-toolbar class="mat-elevation-z6">
+    <button md-icon-button routerLink="/" routerLinkActive="active">
+      <md-icon svgIcon="docker-logo" style="height: 40px; width: 40px;">docker-logo</md-icon>
+    </button>
 
-<!-- Routed views go here -->
-<div class="app-content-padding">
+    <span style="flex: 1 1 auto;"></span>
+
+    <button md-icon-button title="Containers" routerLink="/containers" routerLinkActive="active">
+      <md-icon>grain</md-icon>
+    </button>
+    <button md-icon-button title="Images" routerLink="/images" routerLinkActive="active">
+      <md-icon>view_comfy</md-icon>
+    </button>
+  </md-toolbar>
+
+  <!-- Routed views go here -->
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="loading">
-      <md-progress-bar mode='indeterminate'></md-progress-bar>
+    <md-progress-bar mode='indeterminate'></md-progress-bar>
   </div>
   <router-outlet></router-outlet>
 </div>

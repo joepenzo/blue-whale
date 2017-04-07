@@ -1,28 +1,60 @@
-<div fxLayoutWrap class="images-list">
-  <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of images; let i = index" [attr.title]="item.RepoTags.join(', ')">
-    <md-card>
-      <md-card-subtitle>
-        <div fxLayout="row" fxLayoutAlign="space-between end">
-          <span>{{item.RepoTags.join(", ")}}</span>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="space-between end">
-          <span>{{item.Created * 1000 | date:'medium'}}</span>
-          <span>{{item.Size | length}}</span>
-        </div>
-      </md-card-subtitle>
+<md-tab-group (selectChange) = "tabChanged($event)" style="height: 100%;">
+  <md-tab label="Local">
+    <div fxLayoutWrap class="images-list">
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of images; let i = index" [attr.title]="item.RepoTags.join(', ')">
+        <md-card>
+          <md-card-subtitle>
+            <div fxLayout="row" fxLayoutAlign="space-between end">
+              <span>{{item.RepoTags.join(", ")}}</span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between end">
+              <span>{{item.Created * 1000 | date:'medium'}}</span>
+              <span>{{item.Size | length}}</span>
+            </div>
+          </md-card-subtitle>
 
-      <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-        <button md-icon-button title="Create Container">
-          <md-icon>create</md-icon>
-        </button>
-        <button md-icon-button title="Remove Image" (click)="remove(item, i)">
-          <md-icon>delete_sweep</md-icon>
-        </button>
-      </md-card-actions>
+          <md-card-actions fxLayout="row" fxLayoutAlign="center end">
+            <button md-icon-button title="Create Container">
+              <md-icon>create</md-icon>
+            </button>
+            <button md-icon-button title="Remove Image" (click)="remove(item, i)">
+              <md-icon>delete_sweep</md-icon>
+            </button>
+          </md-card-actions>
+        </md-card>
 
-    </md-card>
+        <layer *ngIf="item.State" [height]="128" ></layer>
+      </div>
+    </div>
+  </md-tab>
 
-    <layer *ngIf="item.State" [height]="128" ></layer>
+  <md-tab label="Docker Hub">
+    <div fxLayoutWrap class="images-list">
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of remoteImages; let i = index" [attr.title]="item.name">
+        <md-card>
+          <md-card-subtitle>
+            <div fxLayout="row" fxLayoutAlign="space-between end">
+              <span>{{item.name}}</span>
+              <span *ngIf="item.is_official">official</span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between end">
+              <span><md-icon>favorite_border</md-icon><span>{{item.star_count}}</span></span>
+              <span title="Automated" *ngIf="item.is_automated"><md-icon>autorenew</md-icon></span>
+            </div>
+            
+            <p>{{item.description}}</p>
+            
+          </md-card-subtitle>
 
-  </div>
-</div>
+          <md-card-actions fxLayout="row" fxLayoutAlign="center end">
+            <button md-icon-button title="Pull Image">
+              <md-icon>get_app</md-icon>
+            </button>
+          </md-card-actions>
+        </md-card>
+
+        <layer *ngIf="item.State" [height]="128" ></layer>
+      </div>
+    </div>
+  </md-tab>
+</md-tab-group>

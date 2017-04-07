@@ -12,21 +12,12 @@ import { Component, OnInit } from '@angular/core';
 export class ImagesComponent implements OnInit {
 
   images: Array<ImageInfo> = new Array<ImageInfo>();
+  remoteImages: Array<any> = new Array<any>();
 
   constructor(private dockerService: DockerService, public dialog: MdDialog) { }
 
   ngOnInit() {
-    // this.dockerService.searchImages("mysql").then(v => {
-    //   console.log(v);
-    // });
-    // this.dockerService.getInfo().then((v) => {
-    //   console.log(v);
-    // });
-
-    // this.dockerService.getVersion().then((v) => {
-    //   console.log(v);
-    // });
-    this.refresh();
+    this.refreshLocal();
   }
 
   remove(item, i: number) {
@@ -43,7 +34,24 @@ export class ImagesComponent implements OnInit {
     });;
   }
 
-  refresh() {
+  tabChanged($event) {
+    if($event.index == 1) {
+      this.search({});
+    }
+  }
+
+  search(options: {}) {
+    // if(!options["term"]) options["filters"] = '{"is-automated": ["true"]}';
+    options["term"] = 'mysql';
+    // options["limit"] = 100;
+    this.dockerService.searchImages(options).then(v => {
+      console.log(v);
+      this.remoteImages = v;
+    });
+
+  }
+
+  refreshLocal() {
     this.dockerService.getImages().then((v) => {
       v.forEach((value) => {
         if(value.RepoTags.length > 1) {

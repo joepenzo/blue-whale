@@ -1,6 +1,4 @@
 .images-list {
-    overflow-y: auto;
-    height: 100%;
     padding: 5px;
 }
 
@@ -12,4 +10,9 @@ span {
     text-overflow: ellipsis;
     overflow-x: hidden;
     white-space: nowrap;
+}
+
+:host {
+    height: 100%;
+    overflow: hidden;
 }

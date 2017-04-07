@@ -4,7 +4,14 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { AlertDialogComponent } from './../../shared/alert-dialog.component';
 
+export const State = {
+  RUNNING: "running",
+  WAITING: "waiting",
+  EXITED: "exited",
+}
+
 @Component({
+  selector: 'containers-component',
   templateUrl: './containers.component.html',
   styleUrls: ['./containers.component.css']
 })
@@ -20,53 +27,50 @@ export class ContainersComponent implements OnInit {
   }
 
   start(id: string, index: number) {
-    this.containers[index].State = "waiting";
+    this.containers[index].State = State.WAITING;
     this.dockerService.startContainer(id)
       .then((value: any) => {
-        this.containers[index].State = "running";
+        this.containers[index].State = State.RUNNING;
       })
       .catch((error: string) => {
-        this.dialog.open(AlertDialogComponent, {data: {type:"warning", message: error}});
-        this.containers[index].State = "exited";
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        this.containers[index].State = State.EXITED;
       });
   }
 
   stop(id: string, index: number) {
-    this.containers[index].State = "waiting";
+    this.containers[index].State = State.WAITING;
     this.dockerService.stopContainer(id)
       .then((value: any) => {
-        this.containers[index].State = "exited";
+        this.containers[index].State = State.EXITED;
       })
       .catch((error: String) => {
-        this.dialog.open(AlertDialogComponent, {data: {type:"warning", message: error}});
-        this.containers[index].State = "running";
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        this.containers[index].State = State.RUNNING;
       });
   }
 
   restart(id: string, index: number) {
-    this.containers[index].State = "waiting";
-    this.dockerService.stopContainer(id)
+    this.containers[index].State = State.WAITING;
+    this.dockerService.restartContainer(id)
       .then((value: any) => {
-        this.dockerService.startContainer(id)
-          .then((value: any) => {
-            this.containers[index].State = "running";
-          })
+        this.containers[index].State = State.RUNNING;
       })
       .catch((error: String) => {
-        this.dialog.open(AlertDialogComponent, {data: {type:"warning", message: error}});
-        this.containers[index].State = "running";
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        this.containers[index].State = State.RUNNING;
       });
   }
 
   remove(id: string, index: number) {
-    this.containers[index].State = "waiting";
-    this.dockerService.removeContainer(id)
+    this.containers[index].State = State.WAITING;
+    this.dockerService.removeContainer(id, {force: this.containers[index].State = State.RUNNING })
       .then((value: any) => {
         this.containers.splice(index, 1);
       })
       .catch((error: String) => {
-        this.dialog.open(AlertDialogComponent, {data: {type:"warning", message: error}});
-        this.containers[index].State = "exited";
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        this.containers[index].State = State.EXITED;
       });;
   }
 

@@ -55,9 +55,19 @@ export class DockerService {
     /**
      * remove container
      * @param id 
+     * @param options 
      */
-    removeContainer(id: string): Promise<any> {
-        return this.docker.getContainer(id).remove();
+    removeContainer(id: string, options?: {}): Promise<any> {
+        return this.docker.getContainer(id).remove(options);
+    }
+
+    /**
+     * restart
+     * @param id 
+     * @param options 
+     */
+    restartContainer(id: string, options?: {}) {
+        return this.docker.getContainer(id).restart(options);
     }
 
     /**
@@ -71,8 +81,8 @@ export class DockerService {
      * search for an image on Docker Hub
      * @param name term
      */
-    searchImages(trem: String): Promise<any> {
-        return this.docker.searchImages({term: trem});
+    searchImages(options: {}): Promise<any> {
+        return this.docker.searchImages(options);
     }
 
     /**
