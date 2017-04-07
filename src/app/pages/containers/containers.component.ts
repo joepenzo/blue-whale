@@ -1,7 +1,8 @@
 import { ContainerInfo, ContainerInspectInfo } from 'dockerode';
 import { DockerService } from './../../shared/Docker.service';
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
+import { MdDialog } from '@angular/material';
+import { AlertDialogComponent } from './../../shared/alert-dialog.component';
 
 @Component({
   templateUrl: './containers.component.html',
@@ -11,7 +12,8 @@ export class ContainersComponent implements OnInit {
 
   containers = new Array<ContainerInfo>();
 
-  constructor(public dockerService: DockerService, public snackBar: MdSnackBar) { }
+  constructor(public dockerService: DockerService, public dialog: MdDialog) {
+  }
 
   ngOnInit() {
     this.refresh();
@@ -24,7 +26,7 @@ export class ContainersComponent implements OnInit {
         this.containers[index].State = "running";
       })
       .catch((error: string) => {
-        this.snackBar.open((error + "").split(":").splice(2).join(" "), "Start", { duration: 5000 });
+        this.dialog.open(AlertDialogComponent, {data: {type:"warning", message: error}});
         this.containers[index].State = "exited";
       });
   }
@@ -36,7 +38,7 @@ export class ContainersComponent implements OnInit {
         this.containers[index].State = "exited";
       })
       .catch((error: String) => {
-        this.snackBar.open((error + "").split(":").splice(2).join(" "), "Start", { duration: 5000 });
+        this.dialog.open(AlertDialogComponent, {data: {type:"warning", message: error}});
         this.containers[index].State = "running";
       });
   }
@@ -51,7 +53,7 @@ export class ContainersComponent implements OnInit {
           })
       })
       .catch((error: String) => {
-        this.snackBar.open((error + "").split(":").splice(2).join(" "), "Start", { duration: 5000 });
+        this.dialog.open(AlertDialogComponent, {data: {type:"warning", message: error}});
         this.containers[index].State = "running";
       });
   }
@@ -63,7 +65,7 @@ export class ContainersComponent implements OnInit {
         this.containers.splice(index, 1);
       })
       .catch((error: String) => {
-        this.snackBar.open((error + "").split(":").splice(2).join(" "), "Start", { duration: 5000 });
+        this.dialog.open(AlertDialogComponent, {data: {type:"warning", message: error}});
         this.containers[index].State = "exited";
       });;
   }

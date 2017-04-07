@@ -36,10 +36,10 @@
       </md-card-actions>
     </md-card>
 
-    <containers-layout *ngIf="item.State == 'waiting'"></containers-layout>
+    <layer *ngIf="item.State == 'waiting'" [height]="160" ></layer>
 
   </div>
 </div>
-<button title="refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="refresh()">
+<button title="Refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="refresh()">
   <md-icon>refresh</md-icon>
 </button>

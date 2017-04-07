@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { remote } from 'electron';
-import { ContainerInfo, ContainerInspectInfo, ImageInfo, ImageInspectInfo } from 'dockerode';
+import { ContainerInfo, ContainerInspectInfo, ImageInfo, ImageInspectInfo, ImageRemoveInfo } from 'dockerode';
 import * as Dockerode from 'dockerode';
 
 @Injectable()
@@ -89,6 +89,15 @@ export class DockerService {
      */
     getImageInspect(name: string): Promise<ImageInspectInfo> {
         return this.docker.getImage(name).inspect();
+    }
+
+    /**
+     * remove image
+     * @param name
+     * @param options 
+     */
+    removeImage(name: string, options?: {}): Promise<ImageRemoveInfo> {
+        return this.docker.getImage(name).remove(options);
     }
 
 

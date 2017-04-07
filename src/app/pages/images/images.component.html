@@ -1,5 +1,5 @@
 <div fxLayoutWrap class="images-list">
-  <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of images" [attr.title]="item.RepoTags.join(', ')">
+  <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of images; let i = index" [attr.title]="item.RepoTags.join(', ')">
     <md-card>
       <md-card-subtitle>
         <div fxLayout="row" fxLayoutAlign="space-between end">
@@ -12,12 +12,17 @@
       </md-card-subtitle>
 
       <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-        <button md-icon-button title="Create">
-          <md-icon>play_arrow</md-icon>
+        <button md-icon-button title="Create Container">
+          <md-icon>create</md-icon>
+        </button>
+        <button md-icon-button title="Remove Image" (click)="remove(item, i)">
+          <md-icon>delete_sweep</md-icon>
         </button>
       </md-card-actions>
 
     </md-card>
+
+    <layer *ngIf="item.State" [height]="128" ></layer>
 
   </div>
 </div>
