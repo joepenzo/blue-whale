@@ -1,3 +1,4 @@
+import { SpinnerService } from './shared/service/spinner.service';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -13,12 +14,12 @@ import { AppRoutingModule } from './app-routing.module'
 import { FlexLayoutModule } from '@angular/flex-layout'
 
 import 'hammerjs';
-import { DockerService } from './shared/Docker.service';
+import { DockerService } from './shared/service/docker.service';
 import { ContainersComponent } from './pages/containers/containers.component';
 import { ImagesComponent } from './pages/images/images.component';
-import { LengthPipe } from './shared/Length.pipe';
-import { AlertDialogComponent } from './shared/alert-dialog.component';
-import { LayerComponent } from './shared/layer.component';
+import { LengthPipe } from './shared/length.pipe';
+import { AlertDialogComponent } from './shared/component/alert-dialog/alert-dialog.component';
+import { LayerComponent } from './shared/component/layer/layer.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { LayerComponent } from './shared/layer.component';
   entryComponents: [
     AlertDialogComponent
   ],
-  providers: [DockerService],
+  providers: [DockerService, SpinnerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

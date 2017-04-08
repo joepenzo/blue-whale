@@ -1,4 +1,4 @@
-<md-tab-group (selectChange) = "tabChanged($event)" style="height: 100%;">
+<md-tab-group (selectChange)="tabChanged($event)" style="height: 100%;">
   <md-tab label="Local">
     <div fxLayoutWrap class="images-list">
       <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of images; let i = index" [attr.title]="item.RepoTags.join(', ')">
@@ -23,27 +23,32 @@
           </md-card-actions>
         </md-card>
 
-        <layer *ngIf="item.State" [height]="128" ></layer>
+        <layer *ngIf="item.State" [height]="128"></layer>
       </div>
     </div>
   </md-tab>
 
   <md-tab label="Docker Hub">
     <div fxLayoutWrap class="images-list">
-      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of remoteImages; let i = index" [attr.title]="item.name">
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of remoteImages; let i = index"
+        [attr.title]="item.name">
         <md-card>
           <md-card-subtitle>
             <div fxLayout="row" fxLayoutAlign="space-between end">
-              <span>{{item.name}}</span>
-              <span *ngIf="item.is_official">official</span>
+              <span style="line-height: 32px;">{{item.name}}</span>
+              <md-chip-list *ngIf="item.is_official">
+                <md-chip color="primary" selected="true">official</md-chip>
+              </md-chip-list>
             </div>
             <div fxLayout="row" fxLayoutAlign="space-between end">
-              <span><md-icon>favorite_border</md-icon><span>{{item.star_count}}</span></span>
+              <button style="text-align: left; padding: 0px;" md-button [disabled]='true'><md-icon>favorite_border</md-icon>{{item.star_count}}</button>
               <span title="Automated" *ngIf="item.is_automated"><md-icon>autorenew</md-icon></span>
             </div>
-            
-            <p>{{item.description}}</p>
-            
+
+            <div fxLayout="row" fxLayoutAlign="space-between end" title="{{item.description}}">
+              <span>{{item.description}}</span>
+            </div>
+
           </md-card-subtitle>
 
           <md-card-actions fxLayout="row" fxLayoutAlign="center end">
@@ -53,7 +58,7 @@
           </md-card-actions>
         </md-card>
 
-        <layer *ngIf="item.State" [height]="128" ></layer>
+        <layer *ngIf="item.State" [height]="128"></layer>
       </div>
     </div>
   </md-tab>

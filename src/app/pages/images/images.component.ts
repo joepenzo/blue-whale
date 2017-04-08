@@ -1,6 +1,7 @@
-import { AlertDialogComponent } from './../../shared/alert-dialog.component';
+import { SpinnerService } from './../../shared/service/spinner.service';
+import { AlertDialogComponent } from './../../shared/component/alert-dialog/alert-dialog.component';
 import { ImageInfo, ImageInspectInfo } from 'dockerode';
-import { DockerService } from './../../shared/Docker.service';
+import { DockerService } from './../../shared/service/docker.service';
 import { MdDialog } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 
@@ -14,7 +15,7 @@ export class ImagesComponent implements OnInit {
   images: Array<ImageInfo> = new Array<ImageInfo>();
   remoteImages: Array<any> = new Array<any>();
 
-  constructor(private dockerService: DockerService, public dialog: MdDialog) { }
+  constructor(private dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService) { }
 
   ngOnInit() {
     this.refreshLocal();
@@ -35,23 +36,32 @@ export class ImagesComponent implements OnInit {
   }
 
   tabChanged($event) {
-    if($event.index == 1) {
-      this.search({});
+    switch ($event.index) {
+      case 1:
+        this.search({});
+        break;
+    
+      default:
+        this.refreshLocal();
+        break;
     }
   }
 
   search(options: {}) {
+    this.spinner.start();
     // if(!options["term"]) options["filters"] = '{"is-automated": ["true"]}';
     options["term"] = 'mysql';
     // options["limit"] = 100;
     this.dockerService.searchImages(options).then(v => {
       console.log(v);
       this.remoteImages = v;
+      this.spinner.stop();
     });
 
   }
 
   refreshLocal() {
+    this.spinner.start();
     this.dockerService.getImages().then((v) => {
       v.forEach((value) => {
         if(value.RepoTags.length > 1) {
@@ -64,6 +74,7 @@ export class ImagesComponent implements OnInit {
           this.images.push(value);
         }
       });
+      this.spinner.stop();
     });
   }
 

@@ -3,7 +3,7 @@
     <md-card [ngClass]="{'containers-list-item-stopped': item.State != 'running', 'containers-list-item-running': item.State == 'running', 'containers-list-item-waiting': item.State == 'waiting'}">
       <md-card-subtitle>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <label>Names: </label><span *ngFor="let name of item.Names">{{name.slice(1)}}</span>
+          <span *ngFor="let name of item.Names">{{name.slice(1)}}</span>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <label>Image: </label><span>{{item.Image}}</span>

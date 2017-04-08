@@ -1,8 +1,9 @@
+import { SpinnerService } from './../../shared/service/spinner.service';
 import { ContainerInfo, ContainerInspectInfo } from 'dockerode';
-import { DockerService } from './../../shared/Docker.service';
+import { DockerService } from './../../shared/service/docker.service';
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { AlertDialogComponent } from './../../shared/alert-dialog.component';
+import { AlertDialogComponent } from './../../shared/component/alert-dialog/alert-dialog.component';
 
 export const State = {
   RUNNING: "running",
@@ -19,7 +20,8 @@ export class ContainersComponent implements OnInit {
 
   containers = new Array<ContainerInfo>();
 
-  constructor(public dockerService: DockerService, public dialog: MdDialog) {
+  constructor(public dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService) {
+    
   }
 
   ngOnInit() {
@@ -75,9 +77,11 @@ export class ContainersComponent implements OnInit {
   }
 
   refresh() {
+    this.spinner.start();
     this.dockerService.getContainers().then((containers) => {
       this.containers = containers;
       this.sort();
+      this.spinner.stop();
     });
   }
 

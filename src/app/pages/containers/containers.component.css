@@ -1,5 +1,4 @@
 .containers-list {
-    white-space: nowrap;
     padding: 5px;
 }
 
@@ -10,6 +9,8 @@
 .containers-list span {
     text-overflow: ellipsis;
     overflow-x: hidden;
+    white-space: nowrap;
+    width: 190px;
 }
 
 .containers-list-item-stopped {
@@ -31,5 +32,4 @@ md-card-actions md-icon {
 :host {
     height: 100%;
     overflow-y: auto;
-    overflow-x: hidden;
 }
