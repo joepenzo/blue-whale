@@ -63,3 +63,11 @@
     </div>
   </md-tab>
 </md-tab-group>
+
+<button *ngIf="current == 0" title="Refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="refreshLocal()">
+  <md-icon>refresh</md-icon>
+</button>
+
+<button *ngIf="current == 1" title="Search" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="searchDialog()">
+  <md-icon>search</md-icon>
+</button>

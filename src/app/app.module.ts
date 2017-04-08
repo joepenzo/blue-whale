@@ -1,3 +1,4 @@
+import { ImagesSearchDialogComponent } from './pages/images/images-search-dialog.component';
 import { SpinnerService } from './shared/service/spinner.service';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,7 +29,8 @@ import { LayerComponent } from './shared/component/layer/layer.component';
     ImagesComponent,
     LengthPipe,
     AlertDialogComponent,
-    LayerComponent
+    LayerComponent,
+    ImagesSearchDialogComponent
   ],
   imports: [
     RouterModule,
@@ -41,7 +43,8 @@ import { LayerComponent } from './shared/component/layer/layer.component';
     BrowserAnimationsModule
   ],
   entryComponents: [
-    AlertDialogComponent
+    AlertDialogComponent,
+    ImagesSearchDialogComponent
   ],
   providers: [DockerService, SpinnerService],
   bootstrap: [AppComponent]

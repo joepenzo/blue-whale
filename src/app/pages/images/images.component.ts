@@ -1,3 +1,5 @@
+import { Subject } from 'rxjs/Subject';
+import { ImagesSearchDialogComponent } from './images-search-dialog.component';
 import { SpinnerService } from './../../shared/service/spinner.service';
 import { AlertDialogComponent } from './../../shared/component/alert-dialog/alert-dialog.component';
 import { ImageInfo, ImageInspectInfo } from 'dockerode';
@@ -11,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./images.component.css']
 })
 export class ImagesComponent implements OnInit {
+
+  current = 0;
 
   images: Array<ImageInfo> = new Array<ImageInfo>();
   remoteImages: Array<any> = new Array<any>();
@@ -36,9 +40,10 @@ export class ImagesComponent implements OnInit {
   }
 
   tabChanged($event) {
+    this.current = $event.index;
     switch ($event.index) {
       case 1:
-        this.search({});
+        this.search({"term": "linux"});
         break;
     
       default:
@@ -47,14 +52,21 @@ export class ImagesComponent implements OnInit {
     }
   }
 
+  searchDialog() {
+    this.dialog.open(ImagesSearchDialogComponent, {data: {}})
+      .afterClosed().subscribe((v) => {
+        if(v) this.search({"term": v})
+      });
+  }
+
   search(options: {}) {
+    if(!options["term"]) return;
     this.spinner.start();
     // if(!options["term"]) options["filters"] = '{"is-automated": ["true"]}';
-    options["term"] = 'mysql';
-    // options["limit"] = 100;
+    options["limit"] = 20;
     this.dockerService.searchImages(options).then(v => {
-      console.log(v);
       this.remoteImages = v;
+      this.remoteImages.sort((n1, n2) => n2.star_count - n1.star_count);
       this.spinner.stop();
     });
 
