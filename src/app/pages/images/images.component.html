@@ -1,7 +1,13 @@
 <md-tab-group (selectChange)="tabChanged($event)" style="height: 100%;">
   <md-tab label="Local">
-    <div fxLayoutWrap class="images-list">
-      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of images; let i = index" [attr.title]="item.RepoTags.join(', ')">
+    <div style="padding: 10px 10px 0 10px;">
+      <md-input-container style="width: 100%;">
+      <input mdInput #localFilterName name="name" placeholder="Name" (keyup.enter)="refreshLocal(localFilterName.value)">
+      <md-icon mdPrefix>search</md-icon> 
+      </md-input-container>
+    </div>
+    <div fxLayout fxLayoutWrap fxFlex="100" class="images-list">
+      <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.lg="25" *ngFor="let item of images; let i = index" [attr.title]="item.RepoTags.join(', ')">
         <md-card>
           <md-card-subtitle>
             <div fxLayout="row" fxLayoutAlign="space-between end">
@@ -29,7 +35,13 @@
   </md-tab>
 
   <md-tab label="Docker Hub">
-    <div fxLayoutWrap class="images-list">
+    <div style="padding: 10px 10px 0 10px;">
+      <md-input-container style="width: 100%;">
+      <input mdInput #remoteFilterName name="name" placeholder="Name" (keyup.enter)="search({'term': remoteFilterName.value})">
+      <md-icon mdPrefix>search</md-icon> 
+      </md-input-container>
+    </div>
+    <div fxLayout fxLayoutWrap fxFlex="100" class="images-list">
       <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of remoteImages; let i = index"
         [attr.title]="item.name">
         <md-card>
@@ -63,11 +75,3 @@
     </div>
   </md-tab>
 </md-tab-group>
-
-<button *ngIf="current == 0" title="Refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="refreshLocal()">
-  <md-icon>refresh</md-icon>
-</button>
-
-<button *ngIf="current == 1" title="Search" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="searchDialog()">
-  <md-icon>search</md-icon>
-</button>
