@@ -64,13 +64,13 @@
           </md-card-subtitle>
 
           <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-            <button md-icon-button title="Pull Image">
+            <button md-icon-button title="Pull Image" (click) = "pull(item)">
               <md-icon>get_app</md-icon>
             </button>
           </md-card-actions>
         </md-card>
 
-        <layer *ngIf="item.State" [height]="128"></layer>
+        <layer *ngIf="item.State" [height]="180"></layer>
       </div>
     </div>
   </md-tab>

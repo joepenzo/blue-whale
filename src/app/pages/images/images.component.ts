@@ -1,3 +1,4 @@
+import { State } from './../containers/containers.component';
 import { Subject } from 'rxjs/Subject';
 import { SpinnerService } from './../../shared/service/spinner.service';
 import { AlertDialogComponent } from './../../shared/component/alert-dialog/alert-dialog.component';
@@ -25,7 +26,7 @@ export class ImagesComponent implements OnInit {
   }
 
   //local
-  
+
   tabChanged($event) {
     this.current = $event.index;
     switch ($event.index) {
@@ -89,6 +90,21 @@ export class ImagesComponent implements OnInit {
       this.spinner.stop();
     });
 
+  }
+
+  /**
+   * pull image by name
+   */
+  pull(item: any) {
+    item.State = "waiting";
+    this.dockerService.pullImage(item["name"])
+      .then((v) => {
+        console.log(v);
+        item.State = "";
+      })
+      .catch((error: string) => {
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+      });
   }
 
 

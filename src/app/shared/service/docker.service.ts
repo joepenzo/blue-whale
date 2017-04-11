@@ -110,5 +110,13 @@ export class DockerService {
         return this.docker.getImage(name).remove(options);
     }
 
+    /**
+     * pull image
+     * @param repoTag 
+     * @param options 
+     */
+    pullImage(repoTag: string, options?: {}): Promise<Dockerode.Image> {
+        return this.docker.pull(repoTag, options);
+    }
 
 }
