@@ -2,9 +2,11 @@
   <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of containers; let i = index">
     <md-card>
       <md-card-subtitle>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="space-between center" style="line-height: 26px;">
           <span *ngFor="let name of item.Names">{{name.slice(1)}}</span>
           <span *ngIf="item.State == 'running'" class="containers-list-item-running">Running</span>
+          <span *ngIf="item.State == 'exited'" class="containers-list-item-stopped">Stoped</span>
+          <span *ngIf="item.State == 'waiting'" class="containers-list-item-stopped">Waitting</span>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <label>Image: </label><span>{{item.Image}}</span>
@@ -40,7 +42,7 @@
       </md-card-actions>
     </md-card>
 
-    <layer *ngIf="item.State == 'waiting'" [height]="160"></layer>
+    <layer *ngIf="item.State == 'waiting'" [height]="182"></layer>
   </div>
 </div>
 

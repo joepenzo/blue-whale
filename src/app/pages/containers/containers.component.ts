@@ -91,17 +91,18 @@ export class ContainersComponent implements OnInit {
   }
 
   settings(id: string, index: number) {
+    let status = this.containers[index].State;
     this.containers[index].State = State.WAITING;
     this.dockerService.getContainerInspect(id)
       .then((v) => {
         this.config.data = {containerInspect: v};
         this.dialog.open(ContainerOptionsComponent, this.config).afterClosed().subscribe((v) => {
-          this.containers[index].State = State.EXITED;  
+          this.containers[index].State = status;  
         });
       })
       .catch((error: String) => {
         this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
-        this.containers[index].State = State.EXITED;
+        this.containers[index].State = status;
       });
   }
 

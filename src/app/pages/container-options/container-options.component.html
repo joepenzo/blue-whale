@@ -1,4 +1,8 @@
-<h3>Settings</h3>
+<!--<h3>Settings</h3>-->
+<md-toolbar class="mat-elevation-z6">
+  <h3>Settings</h3>
+</md-toolbar>
+
 <md-card>
   <md-card-content>
     <h3>General</h3>
@@ -41,38 +45,91 @@
   </md-card-content>
 </md-card>
 
+<!-- Ports -->
 <md-card>
   <md-card-content>
     <h3>Ports</h3>
-    <md-input-container>
-      <input mdInput placeholder="First name">
-    </md-input-container>
+
+    <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of portsModel">
+      <md-input-container fxFlex>
+        <input mdInput placeholder="Docker Port" [(ngModel)]="item.DockerPort">
+      </md-input-container>
+
+      <div fxFlex>
+        <md-input-container>
+          <input mdInput placeholder="Publish Port" [(ngModel)]="item.HostPort">
+        </md-input-container>
+
+        <div style="display: inline-block">
+          <md-select [(ngModel)]="item.type">
+            <md-option [value]="tcp">TCP</md-option>
+            <md-option [value]="udp">UDP</md-option>
+          </md-select>
+        </div>
+
+        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="!item.end">
+          <md-icon>clear</md-icon>
+        </button>
+
+        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="item.end">
+          <md-icon>add</md-icon>
+        </button>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button md-raised-button title="Save" (click)="dialogRef.close()">Save</button>
+    </div>
+
   </md-card-content>
+
 </md-card>
 
 <md-card>
   <md-card-content>
     <h3>Volumes</h3>
-    <md-input-container>
-      <input mdInput placeholder="First name">
-    </md-input-container>
+
+    <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of volumesModel">
+      <md-input-container fxFlex>
+        <input mdInput placeholder="Destination" [(ngModel)]="item.Destination">
+      </md-input-container>
+
+      <div fxFlex>
+        <md-input-container style="width: 80%;">
+          <input mdInput placeholder="Source" [(ngModel)]="item.Source">
+        </md-input-container>
+
+        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="!item.end">
+          <md-icon>clear</md-icon>
+        </button>
+
+        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="item.end">
+          <md-icon>add</md-icon>
+        </button>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button md-raised-button title="Save" (click)="dialogRef.close()">Save</button>
+    </div>
+
   </md-card-content>
 </md-card>
 
 <md-card>
   <md-card-content>
     <h3>Advanced</h3>
-    <md-input-container>
-      <input mdInput placeholder="First name">
-    </md-input-container>
+    <section>
+      <md-checkbox [checked]="configModel.Tty"> Allocate a TTY for this container </md-checkbox>
+    </section>
+
+    <section>
+      <md-checkbox [checked]="configModel.OpenStdin"> Keep STDIN open even if not attached </md-checkbox>
+    </section>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button md-raised-button title="Save" (click)="dialogRef.close()">Save</button>
+    </div>
+
   </md-card-content>
 </md-card>
-
-<div fxLayout="row" fxLayoutAlign="center center">
-  <button md-icon-button title="Close" (click)="dialogRef.close()">
-    <md-icon>clear</md-icon>
-  </button>
-  <button md-icon-button title="Save" (click)="dialogRef.close()">
-    <md-icon>save</md-icon>
-  </button>
-</div>

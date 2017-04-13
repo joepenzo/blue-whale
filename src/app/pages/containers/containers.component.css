@@ -16,7 +16,14 @@
     background-color: green;
     border-radius: 10px;
     color: white;
-    padding: 0 5px 0 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.containers-list-item-stopped {
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
 }
 
 :host {
