@@ -20,8 +20,8 @@
           </md-card-subtitle>
 
           <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-            <button md-icon-button title="Create Container">
-              <md-icon>create</md-icon>
+            <button md-icon-button title="Create Container" (click)="createContainer(item)">
+              <md-icon>add</md-icon>
             </button>
             <button md-icon-button title="Remove Image" (click)="remove(item, i)">
               <md-icon>delete_sweep</md-icon>

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { State } from './../containers/containers.component';
 import { Subject } from 'rxjs/Subject';
 import { SpinnerService } from './../../shared/service/spinner.service';
@@ -19,7 +20,7 @@ export class ImagesComponent implements OnInit {
   images: Array<ImageInfo> = new Array<ImageInfo>();
   remoteImages: Array<any> = new Array<any>();
 
-  constructor(private dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService) { }
+  constructor(private dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService, private router: Router) { }
 
   ngOnInit() {
     this.refreshLocal();
@@ -75,6 +76,24 @@ export class ImagesComponent implements OnInit {
       }
       this.spinner.stop();
     });
+  }
+
+  createContainer(item) {
+    item.State = "waiting";
+    this.dockerService.createContainer({
+      Image: item.RepoTags[0],
+      AttachStdout: true,
+      AttachStderr: true,
+      Tty: true
+    })
+      .then((v) => {
+        item.State = "";
+        this.router.navigate(["containers"]);
+      })
+      .catch((error: string) => {
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        item.State = "";
+      });
   }
 
   //remote

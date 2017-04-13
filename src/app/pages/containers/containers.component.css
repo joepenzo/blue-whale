@@ -12,20 +12,11 @@
     white-space: nowrap;
 }
 
-.containers-list-item-stopped {
-    background-color: #3498db
-}
-
 .containers-list-item-running {
     background-color: green;
-}
-
-.containers-list-item-waiting {
-    background: yellow;
-}
-
-md-card-actions md-icon {
+    border-radius: 10px;
     color: white;
+    padding: 0 5px 0 5px;
 }
 
 :host {

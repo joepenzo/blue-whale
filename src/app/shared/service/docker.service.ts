@@ -21,6 +21,10 @@ export class DockerService {
         return this.docker.version();
     }
 
+    createContainer(options: Dockerode.ContainerCreateOptions) :Promise<Dockerode.Container> {
+        return this.docker.createContainer(options);
+    }
+
     /**
      * all of contatisers
      */
@@ -34,6 +38,14 @@ export class DockerService {
      */
     getContainer(id: string): Dockerode.Container {
         return this.docker.getContainer(id);
+    }
+
+    /**
+     * get container inspect
+     * @param id
+     */
+    getContainerInspect(id: string): Promise<ContainerInspectInfo> {
+        return this.docker.getContainer(id).inspect();
     }
 
     /**
@@ -116,7 +128,7 @@ export class DockerService {
      * @param options 
      */
     pullImage(repoTag: string, options?: {}): Promise<Dockerode.Image> {
-        return this.docker.pull(repoTag, options);
+        return this.docker.pull( repoTag + ':latest', options );
     }
 
 }

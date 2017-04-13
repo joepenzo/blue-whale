@@ -20,6 +20,7 @@ import { ImagesComponent } from './pages/images/images.component';
 import { LengthPipe } from './shared/length.pipe';
 import { AlertDialogComponent } from './shared/component/alert-dialog/alert-dialog.component';
 import { LayerComponent } from './shared/component/layer/layer.component';
+import { ContainerOptionsComponent } from './pages/container-options/container-options.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LayerComponent } from './shared/component/layer/layer.component';
     ImagesComponent,
     LengthPipe,
     AlertDialogComponent,
-    LayerComponent
+    LayerComponent,
+    ContainerOptionsComponent
   ],
   imports: [
     RouterModule,
@@ -41,7 +43,8 @@ import { LayerComponent } from './shared/component/layer/layer.component';
     BrowserAnimationsModule
   ],
   entryComponents: [
-    AlertDialogComponent
+    AlertDialogComponent,
+    ContainerOptionsComponent
   ],
   providers: [DockerService, SpinnerService],
   bootstrap: [AppComponent]

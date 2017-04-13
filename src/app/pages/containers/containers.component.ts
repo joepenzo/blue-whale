@@ -1,8 +1,9 @@
+import { ContainerOptionsComponent } from './../container-options/container-options.component';
 import { SpinnerService } from './../../shared/service/spinner.service';
 import { ContainerInfo, ContainerInspectInfo } from 'dockerode';
 import { DockerService } from './../../shared/service/docker.service';
 import { Component, OnInit } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MdDialog, MdDialogConfig } from '@angular/material';
 import { AlertDialogComponent } from './../../shared/component/alert-dialog/alert-dialog.component';
 
 export const State = {
@@ -19,6 +20,19 @@ export const State = {
 export class ContainersComponent implements OnInit {
 
   containers = new Array<ContainerInfo>();
+
+  config: MdDialogConfig = {
+    disableClose: false,
+    width: '80%',
+    height: '90%',
+    position: {
+      top: '',
+      bottom: '',
+      left: '',
+      right: ''
+    },
+    data: {}
+  };
 
   constructor(public dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService) {
     
@@ -73,7 +87,22 @@ export class ContainersComponent implements OnInit {
       .catch((error: String) => {
         this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
         this.containers[index].State = State.EXITED;
-      });;
+      });
+  }
+
+  settings(id: string, index: number) {
+    this.containers[index].State = State.WAITING;
+    this.dockerService.getContainerInspect(id)
+      .then((v) => {
+        this.config.data = {containerInspect: v};
+        this.dialog.open(ContainerOptionsComponent, this.config).afterClosed().subscribe((v) => {
+          this.containers[index].State = State.EXITED;  
+        });
+      })
+      .catch((error: String) => {
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        this.containers[index].State = State.EXITED;
+      });
   }
 
   refresh() {

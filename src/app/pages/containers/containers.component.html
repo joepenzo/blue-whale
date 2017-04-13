@@ -1,9 +1,10 @@
 <div fxLayout fxLayoutWrap fxFlex="100" class="containers-list">
   <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of containers; let i = index">
-    <md-card [ngClass]="{'containers-list-item-stopped': item.State != 'running', 'containers-list-item-running': item.State == 'running', 'containers-list-item-waiting': item.State == 'waiting'}">
+    <md-card>
       <md-card-subtitle>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <span *ngFor="let name of item.Names">{{name.slice(1)}}</span>
+          <span *ngIf="item.State == 'running'" class="containers-list-item-running">Running</span>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <label>Image: </label><span>{{item.Image}}</span>
@@ -32,6 +33,9 @@
       </button>
         <button md-icon-button title="Remove" (click)="remove(item.Id, i)">
         <md-icon>delete_forever</md-icon>
+      </button>
+        <button md-icon-button title="Settings" (click)="settings(item.Id, i)">
+        <md-icon>settings</md-icon>
       </button>
       </md-card-actions>
     </md-card>
