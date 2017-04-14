@@ -82,6 +82,10 @@ export class DockerService {
         return this.docker.getContainer(id).restart(options);
     }
 
+    updateContainer(id: string, options: {}): Promise<any> {
+        return this.docker.getContainer(id).update(options);
+    }
+
     /**
      * all of locale images
      */

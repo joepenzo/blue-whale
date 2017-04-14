@@ -1,3 +1,13 @@
 md-card {
     margin-bottom: 10px;
 }
+
+md-input-container {
+    margin-right: 2px;
+}
+
+:host {
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+}

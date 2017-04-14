@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ContainerOptionsComponent } from './../container-options/container-options.component';
 import { SpinnerService } from './../../shared/service/spinner.service';
 import { ContainerInfo, ContainerInspectInfo } from 'dockerode';
@@ -21,20 +22,7 @@ export class ContainersComponent implements OnInit {
 
   containers = new Array<ContainerInfo>();
 
-  config: MdDialogConfig = {
-    disableClose: false,
-    width: '80%',
-    height: '90%',
-    position: {
-      top: '',
-      bottom: '',
-      left: '',
-      right: ''
-    },
-    data: {}
-  };
-
-  constructor(public dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService) {
+  constructor(public dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService, private router: Router) {
     
   }
 
@@ -95,10 +83,9 @@ export class ContainersComponent implements OnInit {
     this.containers[index].State = State.WAITING;
     this.dockerService.getContainerInspect(id)
       .then((v) => {
-        this.config.data = {containerInspect: v};
-        this.dialog.open(ContainerOptionsComponent, this.config).afterClosed().subscribe((v) => {
-          this.containers[index].State = status;  
-        });
+        sessionStorage.setItem("settingsContainer", JSON.stringify(v));
+        this.router.navigate(["/containerOptions"]);
+        this.containers[index].State = status;
       })
       .catch((error: String) => {
         this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });

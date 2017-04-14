@@ -1,6 +1,12 @@
+import { SpinnerService } from './../../shared/service/spinner.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DockerService } from './../../shared/service/docker.service';
 import { ContainerInspectInfo } from 'dockerode';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MdDialog } from '@angular/material';
+import { AlertDialogComponent } from './../../shared/component/alert-dialog/alert-dialog.component';
+
+const {clipboard} = require('electron')
 
 class General {
 
@@ -24,9 +30,9 @@ export class ContainerOptionsComponent implements OnInit {
   volumesModel = new Array<any>();
   configModel = {};
 
-  constructor(public dialogRef: MdDialogRef<ContainerOptionsComponent>, @Inject(MD_DIALOG_DATA) public data: any) {
-    console.log(data.containerInspect);
-    let c = data.containerInspect;
+  constructor(public dialog: MdDialog, private dockerService: DockerService, private spinner: SpinnerService) {
+    let c = JSON.parse(sessionStorage.getItem("settingsContainer"));
+    console.log(c);
 
     //config
     this.configModel = c.Config;
@@ -39,26 +45,33 @@ export class ContainerOptionsComponent implements OnInit {
       this.generalModel.Env.push({ Key: v.split("=")[0], Value: v.split("=")[1] });
     });
 
-    this.generalModel.Env.push({Key: "", Value: "", end: true});
+    this.generalModel.Env.push({end: true });
 
     //ports
     for (var key in c.NetworkSettings.Ports) {
       c.NetworkSettings.Ports[key].forEach((v) => {
-        this.portsModel.push({DockerPort: key.split("/")[0], Type: key.split("/")[1], HostIp: v.HostIP, HostPort: v.HostPort});  
+        this.portsModel.push({ DockerPort: key.split("/")[0], Type: key.split("/")[1], HostIp: v.HostIP, HostPort: v.HostPort });
       });
     }
 
+    this.portsModel.push({end: true });
+
     //volumes
     this.volumesModel = c.Mounts;
-    
+    this.volumesModel.push({end: true})
+
   }
 
   ngOnInit() {
-
+    this.spinner.stop();
   }
 
-  tabChanged($event) {
-    console.log($event);
+  onRecreate() {
+    
+  }
+
+  onCopyId() {
+    clipboard.writeText(this.generalModel.Id);
   }
 
 }
