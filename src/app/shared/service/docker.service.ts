@@ -82,8 +82,22 @@ export class DockerService {
         return this.docker.getContainer(id).restart(options);
     }
 
+    /**
+     * update container
+     * @param id
+     * @param options 
+     */
     updateContainer(id: string, options: {}): Promise<any> {
         return this.docker.getContainer(id).update(options);
+    }
+
+    /**
+     * rename
+     * @param id
+     * @param options 
+     */
+    renameContainer(id: string, options: {}): Promise<any> {
+        return this.docker.getContainer(id).rename(options);
     }
 
     /**

@@ -74,4 +74,14 @@ export class ContainerOptionsComponent implements OnInit {
     clipboard.writeText(this.generalModel.Id);
   }
 
+  onRename() {
+    this.dockerService.renameContainer(this.generalModel.Id, {name: this.generalModel.Name})
+      .then((v) => {
+        console.log(v);
+      })
+      .catch((error: string) => {
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+      });;
+  }
+
 }
