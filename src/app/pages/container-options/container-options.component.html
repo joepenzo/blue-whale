@@ -19,7 +19,8 @@
     </div>
 
     <!-- environment -->
-    <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of generalModel.Env">
+    <h3>Environment</h3>
+    <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of generalModel.Env; let i = index">
       <md-input-container fxFlex>
         <input mdInput placeholder="KEY" [(ngModel)]="item.Key">
       </md-input-container>
@@ -29,11 +30,11 @@
           <input mdInput placeholder="VALUE" [(ngModel)]="item.Value">
         </md-input-container>
 
-        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="!item.end">
+        <button md-icon-button title="Close" (click)="onClearEnv(i)" *ngIf="generalModel.Env.length > 1 + i">
           <md-icon>clear</md-icon>
         </button>
 
-        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="item.end">
+        <button md-icon-button title="Close" (click)="onAddEnv()" *ngIf="generalModel.Env.length == (i + 1)">
           <md-icon>add</md-icon>
         </button>
       </div>
@@ -48,7 +49,7 @@
   <md-card-content>
     <h3>Ports</h3>
 
-    <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of portsModel">
+    <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of portsModel; let i = index">
       <md-input-container fxFlex>
         <input mdInput placeholder="Docker Port" [(ngModel)]="item.DockerPort">
       </md-input-container>
@@ -63,11 +64,11 @@
           <md-radio-button value="udp">UDP</md-radio-button>
         </md-radio-group>
 
-        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="!item.end">
+        <button md-icon-button title="Close" (click)="onClearPorts(i)" *ngIf="portsModel.length > 1 + i">
           <md-icon>clear</md-icon>
         </button>
 
-        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="item.end">
+        <button md-icon-button title="Close" (click)="onAddPorts()" *ngIf="portsModel.length == 1 + i">
           <md-icon>add</md-icon>
         </button>
       </div>
@@ -81,7 +82,7 @@
   <md-card-content>
     <h3>Volumes</h3>
 
-    <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of volumesModel">
+    <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of volumesModel; let i = index">
       <md-input-container fxFlex>
         <input mdInput placeholder="Destination" [(ngModel)]="item.Destination">
       </md-input-container>
@@ -91,11 +92,11 @@
           <input mdInput placeholder="Source" [(ngModel)]="item.Source">
         </md-input-container>
 
-        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="!item.end">
+        <button md-icon-button title="Close" (click)="onClearVolumes(i)" *ngIf="volumesModel.length > 1 + i">
           <md-icon>clear</md-icon>
         </button>
 
-        <button md-icon-button title="Close" (click)="dialogRef.close()" *ngIf="item.end">
+        <button md-icon-button title="Close" (click)="onAddVolumes()" *ngIf="volumesModel.length == 1 + i">
           <md-icon>add</md-icon>
         </button>
       </div>
@@ -108,11 +109,11 @@
   <md-card-content>
     <h3>Advanced</h3>
     <section>
-      <md-checkbox [checked]="configModel.Tty"> Allocate a TTY for this container </md-checkbox>
+      <md-checkbox [(ngModel)]="configModel.Tty"> Allocate a TTY for this container </md-checkbox>
     </section>
 
     <section>
-      <md-checkbox [checked]="configModel.OpenStdin"> Keep STDIN open even if not attached </md-checkbox>
+      <md-checkbox [(ngModel)]="configModel.OpenStdin"> Keep STDIN open even if not attached </md-checkbox>
     </section>
 
   </md-card-content>

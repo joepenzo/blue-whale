@@ -1,3 +1,9 @@
+<div style="padding: 10px 10px 0 10px;">
+  <md-input-container style="width: 100%;">
+  <input mdInput #filterName name="name" placeholder="Name" (keyup.enter)="refresh(filterName.value)">
+  <md-icon mdPrefix>search</md-icon> 
+  </md-input-container>
+</div>
 <div fxLayout fxLayoutWrap fxFlex="100" class="containers-list">
   <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.gt-sm="33.3333" fxFlex.gt-lg="25" *ngFor="let item of containers; let i = index">
     <md-card>

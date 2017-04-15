@@ -93,10 +93,10 @@ export class ContainersComponent implements OnInit {
       });
   }
 
-  refresh() {
+  refresh(name?: string) {
     this.spinner.start();
     this.dockerService.getContainers().then((containers) => {
-      this.containers = containers;
+      this.containers = name ? containers.filter((v) => v.Names[0].indexOf(name) >= 0 ) : containers;
       this.sort();
       this.spinner.stop();
     });
