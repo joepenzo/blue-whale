@@ -49,6 +49,15 @@ export class DockerService {
     }
 
     /**
+     * constianer logs
+     * @param id 
+     * @param options 
+     */
+    getContainerLogs(id: string, options?:{}): Promise<any> {
+        return this.docker.getContainer(id).logs(options);
+    }
+
+    /**
      * stop container
      * @param id 
      */

@@ -121,14 +121,10 @@ export class ContainerOptionsComponent implements OnInit {
         this.dockerService.createContainer(options)
           .then((v) => {
             this.dockerService.startContainer(v.id)
-              .then((v) => {
-                this.spinner.stop();
-                this.router.navigate(['containers']);
-              })
-              .catch((error: string) => {
-                this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
-                this.spinner.stop();
-              });;
+          })
+          .then((v) => {
+            this.spinner.stop();
+            this.router.navigate(['containers']);
           })
           .catch((error: string) => {
             this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });

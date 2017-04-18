@@ -27,10 +27,10 @@ export class ContainersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refresh();
+    this.onRefresh();
   }
 
-  start(id: string, index: number) {
+  onStart(id: string, index: number) {
     this.containers[index].State = State.WAITING;
     this.dockerService.startContainer(id)
       .then((value: any) => {
@@ -42,7 +42,7 @@ export class ContainersComponent implements OnInit {
       });
   }
 
-  stop(id: string, index: number) {
+  onStop(id: string, index: number) {
     this.containers[index].State = State.WAITING;
     this.dockerService.stopContainer(id)
       .then((value: any) => {
@@ -54,7 +54,28 @@ export class ContainersComponent implements OnInit {
       });
   }
 
-  restart(id: string, index: number) {
+  onLogs(id: string) {
+    console.log(this.dockerService.getContainer(id));
+    this.dockerService.getContainerLogs(id, {stream:true, stdout: true, stderr: true})
+      .then((v: NodeJS.ReadableStream) => {
+        console.log(v);
+        v.on("data", (v) => {
+          console.log(v.toString('utf8'));
+        });
+        // v.pipe(process.stdout);
+      // this.dockerService.getContainer(id).modem.demuxStream(v, process.stdout, process.stderr);
+
+        // console.log(v);
+        // console.log(v.read(1024));
+        // v.pipe(process.stdout);
+        // v.on('end', function(data) {
+        //   console.log(data);
+        //   console.log('finished');
+        // });
+      })
+  }
+
+  onRestart(id: string, index: number) {
     this.containers[index].State = State.WAITING;
     this.dockerService.restartContainer(id)
       .then((value: any) => {
@@ -66,7 +87,7 @@ export class ContainersComponent implements OnInit {
       });
   }
 
-  remove(id: string, index: number) {
+  onRemove(id: string, index: number) {
     this.containers[index].State = State.WAITING;
     this.dockerService.removeContainer(id, {force: this.containers[index].State = State.RUNNING })
       .then((value: any) => {
@@ -78,7 +99,7 @@ export class ContainersComponent implements OnInit {
       });
   }
 
-  settings(id: string, index: number) {
+  onSettings(id: string, index: number) {
     let status = this.containers[index].State;
     this.containers[index].State = State.WAITING;
     this.dockerService.getContainerInspect(id)
@@ -93,7 +114,7 @@ export class ContainersComponent implements OnInit {
       });
   }
 
-  refresh(name?: string) {
+  onRefresh(name?: string) {
     this.spinner.start();
     this.dockerService.getContainers().then((containers) => {
       this.containers = name ? containers.filter((v) => v.Names[0].indexOf(name) >= 0 ) : containers;
