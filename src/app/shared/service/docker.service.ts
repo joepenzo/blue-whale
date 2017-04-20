@@ -57,6 +57,10 @@ export class DockerService {
         return this.docker.getContainer(id).logs(options);
     }
 
+    attachContainer(id: string, options?:{}): Promise<any> {
+        return this.docker.getContainer(id).attach(options);
+    }
+
     /**
      * stop container
      * @param id 

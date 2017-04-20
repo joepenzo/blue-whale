@@ -55,24 +55,8 @@ export class ContainersComponent implements OnInit {
   }
 
   onLogs(id: string) {
-    console.log(this.dockerService.getContainer(id));
-    this.dockerService.getContainerLogs(id, {stream:true, stdout: true, stderr: true})
-      .then((v: NodeJS.ReadableStream) => {
-        console.log(v);
-        v.on("data", (v) => {
-          console.log(v.toString('utf8'));
-        });
-        // v.pipe(process.stdout);
-      // this.dockerService.getContainer(id).modem.demuxStream(v, process.stdout, process.stderr);
-
-        // console.log(v);
-        // console.log(v.read(1024));
-        // v.pipe(process.stdout);
-        // v.on('end', function(data) {
-        //   console.log(data);
-        //   console.log('finished');
-        // });
-      })
+    this.spinner.start();
+    this.router.navigate(["/containerLogs", id]);
   }
 
   onRestart(id: string, index: number) {

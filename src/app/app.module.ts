@@ -21,6 +21,7 @@ import { LengthPipe } from './shared/length.pipe';
 import { AlertDialogComponent } from './shared/component/alert-dialog/alert-dialog.component';
 import { LayerComponent } from './shared/component/layer/layer.component';
 import { ContainerOptionsComponent } from './pages/container-options/container-options.component';
+import { ContainerLogsComponent } from './pages/container-logs/container-logs.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ContainerOptionsComponent } from './pages/container-options/container-o
     LengthPipe,
     AlertDialogComponent,
     LayerComponent,
-    ContainerOptionsComponent
+    ContainerOptionsComponent,
+    ContainerLogsComponent
   ],
   imports: [
     RouterModule,
