@@ -154,6 +154,15 @@ export class DockerService {
     }
 
     /**
+     * remove image
+     * @param name
+     * @param options 
+     */
+    tagImage(name: string, options: {repo: string, tag: string}): Promise<any> {
+        return this.docker.getImage(name).tag(options);
+    }
+
+    /**
      * pull image
      * @param repoTag 
      * @param options 

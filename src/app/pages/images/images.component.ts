@@ -1,3 +1,4 @@
+import { ImageTagDialogComponent } from './image-tag-dialog.component';
 import { Router } from '@angular/router';
 import { State } from './../containers/containers.component';
 import { Subject } from 'rxjs/Subject';
@@ -94,6 +95,31 @@ export class ImagesComponent implements OnInit {
         this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
         item.State = "";
       });
+  }
+
+  onTag(item) {
+    let state = item.State;
+    item.State = "waiting";
+    this.dialog.open(ImageTagDialogComponent, { data: {} }).afterClosed().subscribe((v) => {
+      if(!v) return;
+      this.dockerService.tagImage(item.RepoTags[0], v)
+        .then((v) => {
+          item.State = state;
+          this.onRefreshLocal();
+        })
+        .catch((error: string) => {
+          this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+          item.State = "";
+        });;
+    });
+  }
+
+  onExport() {
+
+  }
+
+  onImport() {
+
   }
 
   //remote

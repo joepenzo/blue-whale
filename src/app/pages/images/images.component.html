@@ -23,6 +23,15 @@
             <button md-icon-button title="Create Container" (click)="onCreateContainer(item)">
               <md-icon>add</md-icon>
             </button>
+            <button md-icon-button title="Tag" (click)="onTag(item)">
+              <md-icon>book</md-icon>
+            </button>
+            <button md-icon-button title="Import" (click)="onImport(item)">
+              <md-icon>vertical_align_top</md-icon>
+            </button>
+            <button md-icon-button title="Export" (click)="onExport(item)">
+              <md-icon>vertical_align_bottom</md-icon>
+            </button>
             <button md-icon-button title="Remove Image" (click)="onRemove(item, i)">
               <md-icon>delete_sweep</md-icon>
             </button>

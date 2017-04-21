@@ -1,3 +1,4 @@
+import { ImageTagDialogComponent } from './pages/images/image-tag-dialog.component';
 import { SpinnerService } from './shared/service/spinner.service';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,6 +30,7 @@ import { HomeComponent } from './pages/home/home.component';
     AppComponent,
     ContainersComponent,
     ImagesComponent,
+    ImageTagDialogComponent,
     LengthPipe,
     AlertDialogComponent,
     LayerComponent,
@@ -49,7 +51,7 @@ import { HomeComponent } from './pages/home/home.component';
   entryComponents: [
     AlertDialogComponent,
     ContainerOptionsComponent,
-    HomeComponent
+    ImageTagDialogComponent
   ],
   providers: [DockerService, SpinnerService],
   bootstrap: [AppComponent]
