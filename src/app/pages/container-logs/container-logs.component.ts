@@ -14,12 +14,15 @@ import { DomSanitizer } from '@angular/platform-browser'
   styleUrls: ['./container-logs.component.css']
 })
 export class ContainerLogsComponent implements OnInit, AfterViewChecked {
-  convert = new Convert();
-  logs: Array<any> = new Array<any>();
+
+  @ViewChild('scrollDiv')
+  private scrollContainer: ElementRef;
+  private convert = new Convert();
 
   public logSubject: Subject<any> = new Subject();
 
-  @ViewChild('scrollDiv') private scrollContainer: ElementRef;
+  logs: Array<any> = new Array<any>();
+  container: any;
 
   constructor(public dockerService: DockerService, public spinner: SpinnerService, public route: ActivatedRoute, private ngZone: NgZone, private domSanitizer: DomSanitizer) {
     this.logSubject.subscribe((v) => {
@@ -28,12 +31,26 @@ export class ContainerLogsComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
+    this.loadLogs();
+  }
+
+  //scroll to bottom
+  ngAfterViewChecked() {
+    try {
+      this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
+
+  loadLogs() {
     this.route.params.subscribe(v => {
-      this.dockerService.getContainerLogs(v["id"], { stdout: true, stderr: true, tail: 1000, follow: false, timestamp: 1 })
+      this.ngZone.run(() => this.container = this.dockerService.getContainer(v["id"]));
+      
+      this.dockerService.getContainerLogs(v["id"], { stdout: true, stderr: true, follow: false, timestamp: 1 })
         .then((v: NodeJS.ReadableStream) => {
           v.setEncoding("utf8");
           v.on("data", (v) => {
             let unsafeHtml = v + "";
+            unsafeHtml = unsafeHtml.substr(8);
             unsafeHtml = this.convert.toHtml(unsafeHtml.replace(/ /g, '&nbsp;<wbr>'));
             this.ngZone.run(() => {
               this.logSubject.next(this.domSanitizer.bypassSecurityTrustHtml(unsafeHtml));
@@ -43,12 +60,6 @@ export class ContainerLogsComponent implements OnInit, AfterViewChecked {
         });
 
     });
-  }
-
-  ngAfterViewChecked() {
-    try {
-      this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
-    } catch (err) { }
   }
 
 }

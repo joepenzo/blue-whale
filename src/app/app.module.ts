@@ -22,6 +22,7 @@ import { AlertDialogComponent } from './shared/component/alert-dialog/alert-dial
 import { LayerComponent } from './shared/component/layer/layer.component';
 import { ContainerOptionsComponent } from './pages/container-options/container-options.component';
 import { ContainerLogsComponent } from './pages/container-logs/container-logs.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ContainerLogsComponent } from './pages/container-logs/container-logs.co
     AlertDialogComponent,
     LayerComponent,
     ContainerOptionsComponent,
-    ContainerLogsComponent
+    ContainerLogsComponent,
+    HomeComponent
   ],
   imports: [
     RouterModule,
@@ -46,7 +48,8 @@ import { ContainerLogsComponent } from './pages/container-logs/container-logs.co
   ],
   entryComponents: [
     AlertDialogComponent,
-    ContainerOptionsComponent
+    ContainerOptionsComponent,
+    HomeComponent
   ],
   providers: [DockerService, SpinnerService],
   bootstrap: [AppComponent]

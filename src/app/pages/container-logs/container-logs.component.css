@@ -1,7 +1,7 @@
 :host {
     height: 100%;
     overflow: hidden;
-    padding: 10px;
+    padding: 0 0 0 10px;
     color: white;
     background-color: black;
     font-size: 0.8rem;

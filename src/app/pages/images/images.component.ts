@@ -23,25 +23,25 @@ export class ImagesComponent implements OnInit {
   constructor(private dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService, private router: Router) { }
 
   ngOnInit() {
-    this.refreshLocal();
+    this.onRefreshLocal();
   }
 
   //local
 
-  tabChanged($event) {
+  onTabChanged($event) {
     this.current = $event.index;
     switch ($event.index) {
       case 1:
-        this.search({ "term": "linux" });
+        this.onSearch({ "term": "linux" });
         break;
 
       default:
-        this.refreshLocal();
+        this.onRefreshLocal();
         break;
     }
   }
 
-  remove(item, i: number) {
+  onRemove(item, i: number) {
     item.State = "waiting";
     this.dockerService.removeImage(item.RepoTags[0])
       .then((v) => {
@@ -55,7 +55,7 @@ export class ImagesComponent implements OnInit {
       });;
   }
 
-  refreshLocal(name?: string) {
+  onRefreshLocal(name?: string) {
     this.images = new Array<ImageInfo>();
     this.spinner.start();
     this.dockerService.getImages().then((v) => {
@@ -78,7 +78,7 @@ export class ImagesComponent implements OnInit {
     });
   }
 
-  createContainer(item) {
+  onCreateContainer(item) {
     item.State = "waiting";
     this.dockerService.createContainer({
       Image: item.RepoTags[0],
@@ -98,7 +98,7 @@ export class ImagesComponent implements OnInit {
 
   //remote
 
-  search(options: {}) {
+  onSearch(options: {}) {
     if (!options["term"]) return;
     this.spinner.start();
     // if(!options["term"]) options["filters"] = '{"is-automated": ["true"]}';
@@ -114,11 +114,10 @@ export class ImagesComponent implements OnInit {
   /**
    * pull image by name
    */
-  pull(item: any) {
+  onPull(item: any) {
     item.State = "waiting";
     this.dockerService.pullImage(item["name"])
       .then((v) => {
-        console.log(v);
         item.State = "";
       })
       .catch((error: string) => {

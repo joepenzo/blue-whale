@@ -1,8 +1,8 @@
-<md-tab-group (selectChange)="tabChanged($event)" style="height: 100%;">
+<md-tab-group (selectChange)="onTabChanged($event)" style="height: 100%;">
   <md-tab label="Local">
     <div style="padding: 10px 10px 0 10px;">
       <md-input-container style="width: 100%;">
-      <input mdInput #localFilterName name="name" placeholder="Name" (keyup.enter)="refreshLocal(localFilterName.value)">
+      <input mdInput #localFilterName name="name" placeholder="Name" (keyup.enter)="onRefreshLocal(localFilterName.value)">
       <md-icon mdPrefix>search</md-icon> 
       </md-input-container>
     </div>
@@ -20,10 +20,10 @@
           </md-card-subtitle>
 
           <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-            <button md-icon-button title="Create Container" (click)="createContainer(item)">
+            <button md-icon-button title="Create Container" (click)="onCreateContainer(item)">
               <md-icon>add</md-icon>
             </button>
-            <button md-icon-button title="Remove Image" (click)="remove(item, i)">
+            <button md-icon-button title="Remove Image" (click)="onRemove(item, i)">
               <md-icon>delete_sweep</md-icon>
             </button>
           </md-card-actions>
@@ -37,7 +37,7 @@
   <md-tab label="Docker Hub">
     <div style="padding: 10px 10px 0 10px;">
       <md-input-container style="width: 100%;">
-      <input mdInput #remoteFilterName name="name" placeholder="Name" (keyup.enter)="search({'term': remoteFilterName.value})">
+      <input mdInput #remoteFilterName name="name" placeholder="Name" (keyup.enter)="onSearch({'term': remoteFilterName.value})">
       <md-icon mdPrefix>search</md-icon> 
       </md-input-container>
     </div>
@@ -64,7 +64,7 @@
           </md-card-subtitle>
 
           <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-            <button md-icon-button title="Pull Image" (click) = "pull(item)">
+            <button md-icon-button title="Pull Image" (click) = "onPull(item)">
               <md-icon>get_app</md-icon>
             </button>
           </md-card-actions>

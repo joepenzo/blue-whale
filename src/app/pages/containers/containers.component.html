@@ -45,9 +45,9 @@
           <md-icon>replay</md-icon>
         </button>
 
-        <button md-icon-button title="Exec" *ngIf="item.State == 'running'">
+        <!--<button md-icon-button title="Exec" *ngIf="item.State == 'running'">
           <md-icon>code</md-icon>
-        </button>
+        </button>-->
 
         <button md-icon-button title="Remove" (click)="onRemove(item.Id, i)">
           <md-icon>delete_forever</md-icon>
@@ -64,6 +64,6 @@
   </div>
 </div>
 
-<button title="Refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="refresh()">
+<button title="Refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 20px;" md-fab (click)="onRefresh()">
   <md-icon>refresh</md-icon>
 </button>
