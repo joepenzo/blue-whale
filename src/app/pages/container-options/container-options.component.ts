@@ -1,3 +1,4 @@
+import { fadeInAnimation } from './../../animations/fade-in.animation';
 import { SpinnerService } from './../../shared/service/spinner.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DockerService } from './../../shared/service/docker.service';
@@ -21,7 +22,9 @@ class General {
 @Component({
   selector: 'app-container-options',
   templateUrl: './container-options.component.html',
-  styleUrls: ['./container-options.component.css']
+  styleUrls: ['./container-options.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ContainerOptionsComponent implements OnInit {
   //Config.Evn

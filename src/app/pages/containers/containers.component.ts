@@ -1,3 +1,4 @@
+import { fadeInAnimation } from './../../animations/fade-in.animation';
 import { Router } from '@angular/router';
 import { ContainerOptionsComponent } from './../container-options/container-options.component';
 import { SpinnerService } from './../../shared/service/spinner.service';
@@ -16,7 +17,9 @@ export const State = {
 @Component({
   selector: 'containers-component',
   templateUrl: './containers.component.html',
-  styleUrls: ['./containers.component.css']
+  styleUrls: ['./containers.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ContainersComponent implements OnInit {
 

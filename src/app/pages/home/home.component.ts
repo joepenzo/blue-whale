@@ -1,3 +1,4 @@
+import { fadeInAnimation } from './../../animations/fade-in.animation';
 import { SpinnerService } from './../../shared/service/spinner.service';
 import { Component, OnInit } from '@angular/core';
 import { DockerService } from './../../shared/service/docker.service';
@@ -5,7 +6,9 @@ import { DockerService } from './../../shared/service/docker.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class HomeComponent implements OnInit {
 

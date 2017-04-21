@@ -1,3 +1,4 @@
+import { fadeInAnimation } from './../../animations/fade-in.animation';
 import { ActivatedRoute } from '@angular/router';
 import { SpinnerService } from './../../shared/service/spinner.service';
 import { MdDialog } from '@angular/material';
@@ -11,7 +12,9 @@ import { DomSanitizer } from '@angular/platform-browser'
 @Component({
   selector: 'app-container-logs',
   templateUrl: './container-logs.component.html',
-  styleUrls: ['./container-logs.component.css']
+  styleUrls: ['./container-logs.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ContainerLogsComponent implements OnInit, AfterViewChecked {
 
