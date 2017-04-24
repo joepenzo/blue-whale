@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 import { MaterialModule } from '@angular/material';
 
@@ -53,7 +54,7 @@ import { HomeComponent } from './pages/home/home.component';
     ContainerOptionsComponent,
     ImageTagDialogComponent
   ],
-  providers: [DockerService, SpinnerService],
+  providers: [DockerService, SpinnerService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
