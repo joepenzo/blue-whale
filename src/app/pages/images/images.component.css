@@ -16,3 +16,7 @@ span {
     height: 100%;
     overflow: hidden;
 }
+
+button[hidden] {
+    display: none;
+}

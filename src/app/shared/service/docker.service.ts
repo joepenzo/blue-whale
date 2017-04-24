@@ -154,7 +154,7 @@ export class DockerService {
     }
 
     /**
-     * remove image
+     * tag image
      * @param name
      * @param options 
      */
@@ -162,6 +162,25 @@ export class DockerService {
         return this.docker.getImage(name).tag(options);
     }
 
+
+    /**
+     * get image stream
+     * @param name
+     * @param image
+     */
+    getImageStream(name: string): Promise<NodeJS.ReadableStream> {
+        return this.docker.getImage(name).get();
+    }
+
+    /**
+     * import image
+     * @param name 
+     * @param options 
+     */
+    loadImage(name: string, options?: {}): Promise<any> {
+        return this.docker.loadImage(name, options);
+    }
+    
     /**
      * pull image
      * @param repoTag 

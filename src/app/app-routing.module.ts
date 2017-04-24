@@ -8,7 +8,7 @@ import { ContainerLogsComponent } from './pages/container-logs/container-logs.co
 import { ImagesComponent } from './pages/images/images.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'containers', component: ContainersComponent },
     { path: 'containerOptions', component: ContainerOptionsComponent },

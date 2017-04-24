@@ -7,7 +7,12 @@ import { AlertDialogComponent } from './../../shared/component/alert-dialog/aler
 import { ImageInfo, ImageInspectInfo } from 'dockerode';
 import { DockerService } from './../../shared/service/docker.service';
 import { MdDialog } from '@angular/material';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, enableProdMode } from '@angular/core';
+
+const { dialog } = require('electron').remote
+var fs = require('fs')
+
+//http://ourcodeworld.com/articles/read/106/how-to-choose-read-save-delete-or-create-a-file-with-electron-framework
 
 @Component({
   selector: 'app-images',
@@ -17,11 +22,11 @@ import { Component, OnInit } from '@angular/core';
 export class ImagesComponent implements OnInit {
 
   current = 0;
-
+  local = true;
   images: Array<ImageInfo> = new Array<ImageInfo>();
   remoteImages: Array<any> = new Array<any>();
 
-  constructor(private dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService, private router: Router) { }
+  constructor(private dockerService: DockerService, public mdDialog: MdDialog, public spinner: SpinnerService, private router: Router) { }
 
   ngOnInit() {
     this.onRefreshLocal();
@@ -33,10 +38,12 @@ export class ImagesComponent implements OnInit {
     this.current = $event.index;
     switch ($event.index) {
       case 1:
+        this.local = false;
         this.onSearch({ "term": "linux" });
         break;
 
       default:
+        this.local = true;
         this.onRefreshLocal();
         break;
     }
@@ -49,7 +56,7 @@ export class ImagesComponent implements OnInit {
         this.images.splice(i, 1);
       })
       .catch((error: string) => {
-        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
       })
       .then(() => {
         item.State = "";
@@ -92,7 +99,7 @@ export class ImagesComponent implements OnInit {
         this.router.navigate(["containers"]);
       })
       .catch((error: string) => {
-        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
         item.State = "";
       });
   }
@@ -100,26 +107,73 @@ export class ImagesComponent implements OnInit {
   onTag(item) {
     let state = item.State;
     item.State = "waiting";
-    this.dialog.open(ImageTagDialogComponent, { data: {} }).afterClosed().subscribe((v) => {
-      if(!v) return;
+    this.mdDialog.open(ImageTagDialogComponent, { data: {} }).afterClosed().subscribe((v) => {
+      if (!v) return;
       this.dockerService.tagImage(item.RepoTags[0], v)
         .then((v) => {
           item.State = state;
           this.onRefreshLocal();
         })
         .catch((error: string) => {
-          this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+          this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
           item.State = "";
-        });;
+        });
     });
   }
 
-  onExport() {
+  onExport(item) {
+    let state = item.State;
+    item.State = "waiting";
+    dialog.showSaveDialog((v) => {
+      if (!v) {
+        item.State = state;
+        return;
+      }
+
+      this.dockerService.getImageStream(item.RepoTags[0])
+        .then((stream: NodeJS.ReadableStream) => {
+          var writeStream = fs.createWriteStream(v);
+          //write strem to file
+          stream.on("data", (v) => {
+            writeStream.write(v);
+          })
+
+          stream.on("end", (v) => {
+            item.State = state;
+            writeStream.close();
+          })
+
+          writeStream.on('error', (error) => {
+            this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+            item.State = "";
+          });
+        })
+        .catch((error: string) => {
+          this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+          item.State = "";
+        });
+    })
 
   }
 
   onImport() {
+    this.spinner.start();
+    dialog.showOpenDialog({ filters: [{ name: '*.tar', extensions: ['tar'] }] }, (v) => {
+      if (!v) {
+        this.spinner.stop();
+        return;
+      }
 
+      this.dockerService.loadImage(v[0], {})
+        .then((v) => {
+          this.onRefreshLocal();
+          this.spinner.stop();
+        })
+        .catch((error: string) => {
+          this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+          this.spinner.stop();
+        });
+    });
   }
 
   //remote
@@ -147,7 +201,7 @@ export class ImagesComponent implements OnInit {
         item.State = "";
       })
       .catch((error: string) => {
-        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+        this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
       });
   }
 

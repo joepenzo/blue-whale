@@ -2,8 +2,8 @@
   <md-tab label="Local">
     <div style="padding: 10px 10px 0 10px;">
       <md-input-container style="width: 100%;">
-      <input mdInput #localFilterName name="name" placeholder="Name" (keyup.enter)="onRefreshLocal(localFilterName.value)">
-      <md-icon mdPrefix>search</md-icon> 
+        <input mdInput #localFilterName name="name" placeholder="Name" (keyup.enter)="onRefreshLocal(localFilterName.value)">
+        <md-icon mdPrefix>search</md-icon>
       </md-input-container>
     </div>
     <div fxLayout fxLayoutWrap fxFlex="100" class="images-list">
@@ -26,9 +26,6 @@
             <button md-icon-button title="Tag" (click)="onTag(item)">
               <md-icon>book</md-icon>
             </button>
-            <button md-icon-button title="Import" (click)="onImport(item)">
-              <md-icon>vertical_align_top</md-icon>
-            </button>
             <button md-icon-button title="Export" (click)="onExport(item)">
               <md-icon>vertical_align_bottom</md-icon>
             </button>
@@ -41,13 +38,14 @@
         <layer *ngIf="item.State" [height]="128"></layer>
       </div>
     </div>
+
   </md-tab>
 
   <md-tab label="Docker Hub">
     <div style="padding: 10px 10px 0 10px;">
       <md-input-container style="width: 100%;">
-      <input mdInput #remoteFilterName name="name" placeholder="Name" (keyup.enter)="onSearch({'term': remoteFilterName.value})">
-      <md-icon mdPrefix>search</md-icon> 
+        <input mdInput #remoteFilterName name="name" placeholder="Name" (keyup.enter)="onSearch({'term': remoteFilterName.value})">
+        <md-icon mdPrefix>search</md-icon>
       </md-input-container>
     </div>
     <div fxLayout fxLayoutWrap fxFlex="100" class="images-list">
@@ -73,7 +71,7 @@
           </md-card-subtitle>
 
           <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-            <button md-icon-button title="Pull Image" (click) = "onPull(item)">
+            <button md-icon-button title="Pull Image" (click)="onPull(item)">
               <md-icon>get_app</md-icon>
             </button>
           </md-card-actions>
@@ -84,3 +82,12 @@
     </div>
   </md-tab>
 </md-tab-group>
+
+
+<button title="Refresh" [hidden]="!local" style="position: fixed; z-index: 2; right: 5px; bottom: 60px;" md-mini-fab (click)="onRefreshLocal()">
+  <md-icon>refresh</md-icon>
+</button>
+
+<button title="Import" [hidden]="!local" style="position: fixed; z-index: 2; right: 5px; bottom: 10px;" md-mini-fab (click)="onImport()">
+  <md-icon>vertical_align_top</md-icon>
+</button>
