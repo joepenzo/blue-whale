@@ -12,6 +12,7 @@ import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, Navigatio
 export class AppComponent implements OnInit {
 
   loading: boolean = false;
+  localeName: string = localStorage.getItem("localeName");
 
   constructor(mdIconRegistry: MdIconRegistry, sanitizer: DomSanitizer, router: Router, public spinner: SpinnerService) {
     mdIconRegistry.addSvgIcon("docker-logo", sanitizer.bypassSecurityTrustResourceUrl('assets/images/logo.svg'));
@@ -36,6 +37,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() { 
     this.spinner.stop();
+  }
+
+  onChangeLanguage(locale: string) {
+    localStorage.setItem("localeName", locale);
+    location.reload();
   }
 
 }

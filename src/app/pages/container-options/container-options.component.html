@@ -4,19 +4,19 @@
 
 <md-card>
   <md-card-content>
-    <h3>General</h3>
+    <h3 i18n="general">General</h3>
 
     <div fxLayout="row" fxLayout.xs="column">
       <md-input-container fxFlex>
         <input mdInput placeholder="ID" disabled [(ngModel)]="generalModel.Id">
-        <button md-icon-button mdSuffix (click)="onCopyId()">
+        <button md-icon-button mdSuffix i18n-title="copy" title="Copy" (click)="onCopyId()">
           <md-icon>content_copy</md-icon>
         </button>
       </md-input-container>
       <md-input-container fxFlex>
-        <input mdInput placeholder="Name" [(ngModel)]="generalModel.Name">
+        <input mdInput i18n-placeholder="name" placeholder="Name" [(ngModel)]="generalModel.Name">
         
-        <button md-icon-button mdSuffix (click)="onRename()">
+        <button md-icon-button i18n-title="update" title="Update" mdSuffix (click)="onRename()">
           <md-icon>update</md-icon>
         </button>
       </md-input-container>
@@ -34,11 +34,11 @@
           <input mdInput placeholder="VALUE" [(ngModel)]="item.Value">
         </md-input-container>
 
-        <button md-icon-button title="Close" (click)="onClearEnv(i)" *ngIf="generalModel.Env.length > 1 + i">
+        <button md-icon-button i18n-title="close" title="Close" (click)="onClearEnv(i)" *ngIf="generalModel.Env.length > 1 + i">
           <md-icon>clear</md-icon>
         </button>
 
-        <button md-icon-button title="Close" (click)="onAddEnv()" *ngIf="generalModel.Env.length == (i + 1)">
+        <button md-icon-button i18n-title="add" title="Add" (click)="onAddEnv()" *ngIf="generalModel.Env.length == (i + 1)">
           <md-icon>add</md-icon>
         </button>
       </div>
@@ -51,7 +51,7 @@
 <!-- Ports -->
 <md-card>
   <md-card-content>
-    <h3>Ports</h3>
+    <h3 i18n="port">Ports</h3>
 
     <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of portsModel; let i = index">
       <md-input-container fxFlex>
@@ -68,11 +68,11 @@
           <md-radio-button value="udp">UDP</md-radio-button>
         </md-radio-group>
 
-        <button md-icon-button title="Close" (click)="onClearPorts(i)" *ngIf="portsModel.length > 1 + i">
+        <button md-icon-button i18n-title="close" title="Close" (click)="onClearPorts(i)" *ngIf="portsModel.length > 1 + i">
           <md-icon>clear</md-icon>
         </button>
 
-        <button md-icon-button title="Close" (click)="onAddPorts()" *ngIf="portsModel.length == 1 + i">
+        <button md-icon-button i18n-title="add" title="Add" (click)="onAddPorts()" *ngIf="portsModel.length == 1 + i">
           <md-icon>add</md-icon>
         </button>
       </div>
@@ -84,7 +84,7 @@
 
 <md-card>
   <md-card-content>
-    <h3>Volumes</h3>
+    <h3 i18n="volume">Volumes</h3>
 
     <div fxLayout="row" fxLayout.xs="column" *ngFor="let item of volumesModel; let i = index">
       <md-input-container fxFlex>
@@ -96,11 +96,11 @@
           <input mdInput placeholder="Source" [(ngModel)]="item.Source">
         </md-input-container>
 
-        <button md-icon-button title="Close" (click)="onClearVolumes(i)" *ngIf="volumesModel.length > 1 + i">
+        <button md-icon-button i18n-title="close" title="Close" (click)="onClearVolumes(i)" *ngIf="volumesModel.length > 1 + i">
           <md-icon>clear</md-icon>
         </button>
 
-        <button md-icon-button title="Close" (click)="onAddVolumes()" *ngIf="volumesModel.length == 1 + i">
+        <button md-icon-button i18n-title="add" title="Add" (click)="onAddVolumes()" *ngIf="volumesModel.length == 1 + i">
           <md-icon>add</md-icon>
         </button>
       </div>
@@ -111,7 +111,7 @@
 
 <md-card>
   <md-card-content>
-    <h3>Advanced</h3>
+    <h3 i18n="advanced">Advanced</h3>
     <section>
       <md-checkbox [(ngModel)]="configModel.Tty"> Allocate a TTY for this container </md-checkbox>
     </section>
@@ -123,6 +123,6 @@
   </md-card-content>
 </md-card>
 
-<button title="Recreate" style="position: fixed; z-index: 2; right: 5px; bottom: 10px;" md-mini-fab (click)="onRecreate()">
+<button title="Recreate" i18n-title="recreate" style="position: fixed; z-index: 2; right: 5px; bottom: 10px;" md-mini-fab (click)="onRecreate()">
   <md-icon>cached</md-icon>
 </button>

@@ -7,12 +7,27 @@
 
     <span style="flex: 1 1 auto;"></span>
 
-    <button md-icon-button title="Containers" routerLink="/containers" routerLinkActive="active">
+    <button md-icon-button i18n-title="container" title="Containers" routerLink="/containers" routerLinkActive="active">
       <md-icon>grain</md-icon>
     </button>
-    <button md-icon-button title="Images" routerLink="/images" routerLinkActive="active">
+    <button md-icon-button i18n-title="image" title="Images" routerLink="/images" routerLinkActive="active">
       <md-icon>view_comfy</md-icon>
     </button>
+
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>
+    <md-menu #menu="mdMenu">
+      <button md-menu-item [hidden]="localeName == 'zh-CN'" (click)="onChangeLanguage('zh-CN')">
+        <md-icon>translate</md-icon>
+        <span i18n>Simplified Chinese</span>
+      </button>
+      <button md-menu-item [hidden]="!localeName || localeName == 'en-US'" (click)="onChangeLanguage('en-US')">
+        <md-icon>translate</md-icon>
+        <span i18n>English</span>
+      </button>
+    </md-menu>
+
   </md-toolbar>
 
   <!-- Routed views go here -->

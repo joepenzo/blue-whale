@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="b45d01f61abb874a71b314051193f4b72c3d4cf2" datatype="html">
+        <source>Repository</source>
+        <target>存储库</target>
+        <note priority="1" from="description">repository</note>
+      </trans-unit>
+      <trans-unit id="337ca2e5eeea28eaca91e8511eb5eaafdb385ce6" datatype="html">
+        <source>Tag</source>
+        <target>标签</target>
+        <note priority="1" from="description">tag</note>
+      </trans-unit>
+      <trans-unit id="f5dc4402dbf1d5f8f98da57b6061d5f9be05ca5c" datatype="html">
+        <source>Containers</source>
+        <target>容器</target>
+        <note priority="1" from="description">container</note>
+      </trans-unit>
+      <trans-unit id="b73f7f5060fb22a1e9ec462b1bb02493fa3ab866" datatype="html">
+        <source>Images</source>
+        <target>镜像</target>
+        <note priority="1" from="description">image</note>
+      </trans-unit>
+      <trans-unit id="e179717b33ec270e42584768e8d760e5ac889cbe" datatype="html">
+        <source>Simplified Chinese</source>
+        <target>简体中文</target>
+      </trans-unit>
+      <trans-unit id="a0843de0a64adcc7ee6a946408b6876cd8abdcae" datatype="html">
+        <source>English</source>
+        <target>英文</target>
+      </trans-unit>
+      <trans-unit id="321e4419a943044e674beb55b8039f42a9761ca5" datatype="html">
+        <source>Info</source>
+        <target>信息</target>
+        <note priority="1" from="description">info</note>
+      </trans-unit>
+      <trans-unit id="8fe73a4787b8068b2ba61f54ab7e0f9af2ea1fc9" datatype="html">
+        <source>Version</source>
+        <target>版本</target>
+        <note priority="1" from="description">version</note>
+      </trans-unit>
+      <trans-unit id="3d53f64033c4b76fdc1076ba15955d913209866c" datatype="html">
+        <source>General</source>
+        <target>通常</target>
+        <note priority="1" from="description">general</note>
+      </trans-unit>
+      <trans-unit id="1979da7460819153e11d2078244645d94291b69c" datatype="html">
+        <source>Copy</source>
+        <target>复制</target>
+        <note priority="1" from="description">copy</note>
+      </trans-unit>
+      <trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
+        <source>Name</source>
+        <target>名称</target>
+        <note priority="1" from="description">name</note>
+      </trans-unit>
+      <trans-unit id="047f50bc5b5d17b5bec0196355953e1a5c590ddb" datatype="html">
+        <source>Update</source>
+        <target>更新</target>
+        <note priority="1" from="description">update</note>
+      </trans-unit>
+      <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
+        <source>Close</source>
+        <target>关闭</target>
+        <note priority="1" from="description">close</note>
+      </trans-unit>
+      <trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
+        <source>Add</source>
+        <target>新增</target>
+        <note priority="1" from="description">add</note>
+      </trans-unit>
+      <trans-unit id="2aa1b475352673f7286f0caf8cd593e4c8ac1d64" datatype="html">
+        <source>Ports</source>
+        <target>端口</target>
+        <note priority="1" from="description">port</note>
+      </trans-unit>
+      <trans-unit id="9a28e18873fa5c77a3013b634dd0c87a548e620b" datatype="html">
+        <source>Volumes</source>
+        <target>卷</target>
+        <note priority="1" from="description">volume</note>
+      </trans-unit>
+      <trans-unit id="bc2e854e111ecf2bd7db170da5e3c2ed08181d88" datatype="html">
+        <source>Advanced</source>
+        <target>高级</target>
+        <note priority="1" from="description">advanced</note>
+      </trans-unit>
+      <trans-unit id="011f3e2bfc1fd8407eb5f599352665bfeb145664" datatype="html">
+        <source>Recreate</source>
+        <target>重建</target>
+        <note priority="1" from="description">recreate</note>
+      </trans-unit>
+      <trans-unit id="8dd15f6c73c05a8b0bd7b6d416487ab6570b88c8" datatype="html">
+        <source>Running</source>
+        <target>运行</target>
+      </trans-unit>
+      <trans-unit id="bbf8c3c4252ba29e199cf0e8ebe049a74f0f6a9d" datatype="html">
+        <source>Stoped</source>
+        <target>停止</target>
+      </trans-unit>
+      <trans-unit id="c7e66260e6b774f29781ab404f60bdf3b727f553" datatype="html">
+        <source>Waitting</source>
+        <target>等待</target>
+      </trans-unit>
+      <trans-unit id="1b051734b0ee9021991c91b3ed4e81c244322462" datatype="html">
+        <source>Created</source>
+        <target>新建</target>
+      </trans-unit>
+      <trans-unit id="6e0c521bd06f90224f9f91d008a0c3a651c30c3d" datatype="html">
+        <source>Image: </source>
+        <target>镜像</target>
+        <note priority="1" from="description">image</note>
+      </trans-unit>
+      <trans-unit id="d41830264f2405324130bd7e46b2988c7fcbc624" datatype="html">
+        <source>Ports: </source>
+        <target>端口</target>
+        <note priority="1" from="description">port</note>
+      </trans-unit>
+      <trans-unit id="d20eff1329538ac5a50f0ac1f8153894902d5c90" datatype="html">
+        <source>Network: </source>
+        <target>网络</target>
+        <note priority="1" from="description">network</note>
+      </trans-unit>
+      <trans-unit id="8434d4a28744d7df82cd39ef8da4266fcbc40064" datatype="html">
+        <source>Start</source>
+        <target>开始</target>
+        <note priority="1" from="description">start</note>
+      </trans-unit>
+      <trans-unit id="1d0d5c9a36e72bd9643ff1ede69736ae063d652b" datatype="html">
+        <source>Stop</source>
+        <target>停止</target>
+        <note priority="1" from="description">stop</note>
+      </trans-unit>
+      <trans-unit id="eb3d5aefff38a814b76da74371cbf02c0789a1ef" datatype="html">
+        <source>Logs</source>
+        <target>日志</target>
+        <note priority="1" from="description">log</note>
+      </trans-unit>
+      <trans-unit id="b6d79c6ff771d7b86ce572306867a1705200f957" datatype="html">
+        <source>Restart</source>
+        <target>重启</target>
+        <note priority="1" from="description">restart</note>
+      </trans-unit>
+      <trans-unit id="019d4bd6a5690f0cfa0ecf346a4e6bf7f0d8debb" datatype="html">
+        <source>Remove</source>
+        <target>清除</target>
+        <note priority="1" from="description">remove</note>
+      </trans-unit>
+      <trans-unit id="121cc5391cd2a5115bc2b3160379ee5b36cd7716" datatype="html">
+        <source>Settings</source>
+        <target>设置</target>
+        <note priority="1" from="description">settings</note>
+      </trans-unit>
+      <trans-unit id="c8d1785038d461ec66b5799db21864182b35900a" datatype="html">
+        <source>Refresh</source>
+        <target>刷新</target>
+        <note priority="1" from="description">refresh</note>
+      </trans-unit>
+      <trans-unit id="b9a43e3cbf2157961529d458d1c71389a4ad8004" datatype="html">
+        <source>Create Container</source>
+        <target>创建容器</target>
+      </trans-unit>
+      <trans-unit id="5f19586aba912ec6eb123ec5ab609a3bcc073066" datatype="html">
+        <source>Export</source>
+        <target>导出</target>
+        <note priority="1" from="description">export</note>
+      </trans-unit>
+      <trans-unit id="38cdad77907955df9977ac20447ecc29b624161e" datatype="html">
+        <source>Pull Image</source>
+        <target>拉取镜像</target>
+      </trans-unit>
+      <trans-unit id="a059709f71aa4c0ac219e160e78a738682ca6a36" datatype="html">
+        <source>Import</source>
+        <target>导入</target>
+        <note priority="1" from="description">import</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

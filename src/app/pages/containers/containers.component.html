@@ -1,6 +1,6 @@
 <div style="padding: 10px 10px 0 10px;">
   <md-input-container style="width: 100%;">
-    <input mdInput #filterName name="name" placeholder="Name" (keyup.enter)="onRefresh(filterName.value)">
+    <input mdInput #filterName name="name" i18n-placeholder="name" placeholder="Name" (keyup.enter)="onRefresh(filterName.value)">
     <md-icon mdPrefix>search</md-icon>
   </md-input-container>
 </div>
@@ -10,38 +10,38 @@
       <md-card-subtitle>
         <div fxLayout="row" fxLayoutAlign="space-between center" style="line-height: 26px;">
           <span *ngFor="let name of item.Names">{{name.slice(1)}}</span>
-          <span *ngIf="item.State == 'running'" class="containers-list-item-running">Running</span>
-          <span *ngIf="item.State == 'exited'" class="containers-list-item-stopped">Stoped</span>
-          <span *ngIf="item.State == 'waiting'" class="containers-list-item-stopped">Waitting</span>
-          <span *ngIf="item.State == 'created'" class="containers-list-item-stopped">Created</span>
+          <span *ngIf="item.State == 'running'" class="containers-list-item-running" i18n>Running</span>
+          <span *ngIf="item.State == 'exited'" class="containers-list-item-stopped" i18n>Stoped</span>
+          <span *ngIf="item.State == 'waiting'" class="containers-list-item-stopped" i18n>Waitting</span>
+          <span *ngIf="item.State == 'created'" class="containers-list-item-stopped" i18n>Created</span>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <label>Image: </label><span>{{item.Image}}</span>
+          <label i18n="image">Image: </label><span>{{item.Image}}</span>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <label>Ports: </label>
+          <label i18n="port">Ports: </label>
           <span *ngFor="let port of item.Ports">{{port.PublicPort}}:{{port.PrivatePort}}->{{port.Type}}</span>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <label>Network: </label><span>{{item.HostConfig.NetworkMode}}</span>
+          <label i18n="network">Network: </label><span>{{item.HostConfig.NetworkMode}}</span>
         </div>
       </md-card-subtitle>
 
       <md-card-actions fxLayout="row" fxLayoutAlign="center end">
 
-        <button md-icon-button title="Start" *ngIf="item.State != 'running'" (click)="onStart(item.Id, i)">
+        <button md-icon-button i18n-title="start" title="Start" *ngIf="item.State != 'running'" (click)="onStart(item.Id, i)">
           <md-icon>play_arrow</md-icon>
         </button>
 
-        <button md-icon-button title="Stop" *ngIf="item.State == 'running'" (click)="onStop(item.Id, i)">
+        <button md-icon-button i18n-title="stop" title="Stop" *ngIf="item.State == 'running'" (click)="onStop(item.Id, i)">
           <md-icon>pause</md-icon>
         </button>
 
-        <button md-icon-button title="Logs" (click)="onLogs(item.Id, i)">
+        <button md-icon-button i18n-title="log" title="Logs" (click)="onLogs(item.Id, i)">
           <md-icon>content_paste</md-icon>
         </button>
 
-        <button md-icon-button title="Restart" *ngIf="item.State == 'running'" (click)="onRestart(item.Id, i)">
+        <button md-icon-button i18n-title="restart" title="Restart" *ngIf="item.State == 'running'" (click)="onRestart(item.Id, i)">
           <md-icon>replay</md-icon>
         </button>
 
@@ -49,11 +49,11 @@
           <md-icon>code</md-icon>
         </button>-->
 
-        <button md-icon-button title="Remove" (click)="onRemove(item.Id, i)">
+        <button md-icon-button i18n-title="remove" title="Remove" (click)="onRemove(item.Id, i)">
           <md-icon>delete_forever</md-icon>
         </button>
 
-        <button md-icon-button title="Settings" (click)="onSettings(item.Id, i)">
+        <button md-icon-button i18n-title="settings" title="Settings" (click)="onSettings(item.Id, i)">
           <md-icon>settings</md-icon>
         </button>
 
@@ -64,6 +64,6 @@
   </div>
 </div>
 
-<button title="Refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 10px;" md-mini-fab (click)="onRefresh()">
+<button title="Refresh" i18n-title="refresh" style="position: fixed; z-index: 2; right: 5px; bottom: 10px;" md-mini-fab (click)="onRefresh()">
   <md-icon>refresh</md-icon>
 </button>

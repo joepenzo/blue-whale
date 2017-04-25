@@ -108,7 +108,10 @@ export class ImagesComponent implements OnInit {
     let state = item.State;
     item.State = "waiting";
     this.mdDialog.open(ImageTagDialogComponent, { data: {} }).afterClosed().subscribe((v) => {
-      if (!v) return;
+      if (!v) {
+        item.State = state;
+        return;
+      }
       this.dockerService.tagImage(item.RepoTags[0], v)
         .then((v) => {
           item.State = state;

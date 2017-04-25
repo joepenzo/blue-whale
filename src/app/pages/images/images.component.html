@@ -2,7 +2,7 @@
   <md-tab label="Local">
     <div style="padding: 10px 10px 0 10px;">
       <md-input-container style="width: 100%;">
-        <input mdInput #localFilterName name="name" placeholder="Name" (keyup.enter)="onRefreshLocal(localFilterName.value)">
+        <input mdInput #localFilterName name="name" placeholder="Name" i18n-placeholder="name" (keyup.enter)="onRefreshLocal(localFilterName.value)">
         <md-icon mdPrefix>search</md-icon>
       </md-input-container>
     </div>
@@ -20,16 +20,16 @@
           </md-card-subtitle>
 
           <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-            <button md-icon-button title="Create Container" (click)="onCreateContainer(item)">
+            <button md-icon-button i18n-title title="Create Container" (click)="onCreateContainer(item)">
               <md-icon>add</md-icon>
             </button>
-            <button md-icon-button title="Tag" (click)="onTag(item)">
+            <button md-icon-button i18n-title="tag" title="Tag" (click)="onTag(item)">
               <md-icon>book</md-icon>
             </button>
-            <button md-icon-button title="Export" (click)="onExport(item)">
+            <button md-icon-button i18n-title="export" title="Export" (click)="onExport(item)">
               <md-icon>vertical_align_bottom</md-icon>
             </button>
-            <button md-icon-button title="Remove Image" (click)="onRemove(item, i)">
+            <button md-icon-button i18n-title="remove" title="Remove" (click)="onRemove(item, i)">
               <md-icon>delete_sweep</md-icon>
             </button>
           </md-card-actions>
@@ -44,7 +44,7 @@
   <md-tab label="Docker Hub">
     <div style="padding: 10px 10px 0 10px;">
       <md-input-container style="width: 100%;">
-        <input mdInput #remoteFilterName name="name" placeholder="Name" (keyup.enter)="onSearch({'term': remoteFilterName.value})">
+        <input mdInput #remoteFilterName name="name" i18n-placeholder="name" placeholder="Name" (keyup.enter)="onSearch({'term': remoteFilterName.value})">
         <md-icon mdPrefix>search</md-icon>
       </md-input-container>
     </div>
@@ -71,7 +71,7 @@
           </md-card-subtitle>
 
           <md-card-actions fxLayout="row" fxLayoutAlign="center end">
-            <button md-icon-button title="Pull Image" (click)="onPull(item)">
+            <button md-icon-button i18n-title title="Pull Image" (click)="onPull(item)">
               <md-icon>get_app</md-icon>
             </button>
           </md-card-actions>
@@ -84,10 +84,10 @@
 </md-tab-group>
 
 
-<button title="Refresh" [hidden]="!local" style="position: fixed; z-index: 2; right: 5px; bottom: 60px;" md-mini-fab (click)="onRefreshLocal()">
+<button title="Refresh" i18n-title="refresh" [hidden]="!local" style="position: fixed; z-index: 2; right: 5px; bottom: 60px;" md-mini-fab (click)="onRefreshLocal()">
   <md-icon>refresh</md-icon>
 </button>
 
-<button title="Import" [hidden]="!local" style="position: fixed; z-index: 2; right: 5px; bottom: 10px;" md-mini-fab (click)="onImport()">
+<button title="Import" i18n-title="import" [hidden]="!local" style="position: fixed; z-index: 2; right: 5px; bottom: 10px;" md-mini-fab (click)="onImport()">
   <md-icon>vertical_align_top</md-icon>
 </button>
