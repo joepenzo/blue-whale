@@ -31,7 +31,7 @@ export class ContainerOptionsComponent implements OnInit {
   generalModel: General = new General("", "", new Array<any>());
   portsModel = new Array<any>();
   volumesModel = new Array<any>();
-  configModel = {};
+  configModel = {Tty: false, OpenStdin: false};
 
   constructor(public dialog: MdDialog, private dockerService: DockerService, private spinner: SpinnerService, private router: Router) {
     let c = JSON.parse(sessionStorage.getItem("settingsContainer"));

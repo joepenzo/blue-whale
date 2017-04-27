@@ -4,6 +4,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MdIconRegistry } from '@angular/material';
 import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router'
 
+var remote = require('electron').remote;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -41,7 +43,9 @@ export class AppComponent implements OnInit {
 
   onChangeLanguage(locale: string) {
     localStorage.setItem("localeName", locale);
-    location.reload();
+    // remote.getCurrentWindow().webContents.reload();
+    // remote.getCurrentWindow().reload();
+    remote.getCurrentWindow().loadURL('file://' + __dirname + "/index.html")
   }
 
 }

@@ -9,7 +9,7 @@ let win
 function createWindow () {
   setTimeout(() => {
     // Create the browser window.
-    win = new BrowserWindow({width: 1000, height: 600, minWidth: 800, minHeight: 600})
+    win = new BrowserWindow({width: 1000, height: 600, minWidth: 800, minHeight: 600, icon: __dirname + '/assets/images/docker.ico'})
 
     // and load the index.html of the app.
     win.loadURL(url.format({
@@ -17,9 +17,6 @@ function createWindow () {
       protocol: 'http:',
       slashes: true
     }))
-
-    // Open the DevTools.
-    win.webContents.openDevTools();
 
     // Open the DevTools when in dev mode.
     if(process.env.NODE_ENV=='development')
