@@ -66,24 +66,28 @@ export class ImagesComponent implements OnInit {
   onRefreshLocal(name?: string) {
     this.images = new Array<ImageInfo>();
     this.spinner.start();
-    this.dockerService.getImages().then((v) => {
-      v.forEach((value) => {
-        if (value.RepoTags.length > 1) {
-          value.RepoTags.forEach((v) => {
-            let clone = Object.assign({}, value);
-            clone.RepoTags = [v];
-            this.images.push(clone);
-          });
-        } else {
-          this.images.push(value);
+    this.dockerService.getImages()
+      .then((v) => {
+        v.forEach((value) => {
+          if (value.RepoTags.length > 1) {
+            value.RepoTags.forEach((v) => {
+              let clone = Object.assign({}, value);
+              clone.RepoTags = [v];
+              this.images.push(clone);
+            });
+          } else {
+            this.images.push(value);
+          }
+        });
+        //filter repotag
+        if (name) {
+          this.images = this.images.filter((v) => v.RepoTags[0].indexOf(name) >= 0);
         }
-      });
-      //filter repotag
-      if (name) {
-        this.images = this.images.filter((v) => v.RepoTags[0].indexOf(name) >= 0);
-      }
-      this.spinner.stop();
-    });
+        this.spinner.stop();
+      })
+      .catch((error: String) => {
+        this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+      });;
   }
 
   onCreateContainer(item) {
@@ -186,11 +190,14 @@ export class ImagesComponent implements OnInit {
     this.spinner.start();
     // if(!options["term"]) options["filters"] = '{"is-automated": ["true"]}';
     options["limit"] = 20;
-    this.dockerService.searchImages(options).then(v => {
-      this.remoteImages = v;
-      this.remoteImages.sort((n1, n2) => n2.star_count - n1.star_count);
-      this.spinner.stop();
-    });
+    this.dockerService.searchImages(options)
+      .then(v => {
+        this.remoteImages = v;
+        this.remoteImages.sort((n1, n2) => n2.star_count - n1.star_count);
+        this.spinner.stop();
+      }).catch((error: String) => {
+        this.mdDialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+      });
 
   }
 

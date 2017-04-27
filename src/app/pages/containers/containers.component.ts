@@ -26,7 +26,7 @@ export class ContainersComponent implements OnInit {
   containers = new Array<ContainerInfo>();
 
   constructor(public dockerService: DockerService, public dialog: MdDialog, public spinner: SpinnerService, private router: Router) {
-    
+
   }
 
   ngOnInit() {
@@ -76,7 +76,7 @@ export class ContainersComponent implements OnInit {
 
   onRemove(id: string, index: number) {
     this.containers[index].State = State.WAITING;
-    this.dockerService.removeContainer(id, {force: this.containers[index].State = State.RUNNING })
+    this.dockerService.removeContainer(id, { force: this.containers[index].State = State.RUNNING })
       .then((value: any) => {
         this.containers.splice(index, 1);
       })
@@ -103,11 +103,15 @@ export class ContainersComponent implements OnInit {
 
   onRefresh(name?: string) {
     this.spinner.start();
-    this.dockerService.getContainers().then((containers) => {
-      this.containers = name ? containers.filter((v) => v.Names[0].indexOf(name) >= 0 ) : containers;
-      this.sort();
-      this.spinner.stop();
-    });
+    this.dockerService.getContainers()
+      .then((containers) => {
+        this.containers = name ? containers.filter((v) => v.Names[0].indexOf(name) >= 0) : containers;
+        this.sort();
+        this.spinner.stop();
+      })
+      .catch((error: String) => {
+        this.dialog.open(AlertDialogComponent, { data: { type: "warning", message: error } });
+      });;
   }
 
   private sort() {
