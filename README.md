@@ -15,5 +15,5 @@ Run `npm run start`
 
 Run `npm run build`
 
-##package
+## package
 Run `npm run package:linux`
