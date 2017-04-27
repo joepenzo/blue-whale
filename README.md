@@ -1,9 +1,11 @@
 # BlueWhale
-BlueWhale is a docker ui tool was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+BlueWhale is a Docker UI based on Electron,Angualr 4,Dockerode.
 
-## Init
+# Screenshot
+![Scrrentshot](https://raw.githubusercontent.com/SlowRookie/blue-whale/master/bluewhale-introduce.png)
+
+## Initialization
 Run `npm link`
-Not: Don't use `npm install` to add node_modules
 
 ## Development server
 
@@ -13,6 +15,5 @@ Run `npm run start`
 
 Run `npm run build`
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+##package
+Run `npm run package:linux`
